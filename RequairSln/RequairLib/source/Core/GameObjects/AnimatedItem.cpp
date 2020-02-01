@@ -23,6 +23,6 @@ sf::Vector2f AnimatedItem::GetObjectPosition() const
 
 void AnimatedItem::update(sf::Int64 elapsedTime)
 {
-	GB:AnimatedSprite::update(elapsedTime);
+	GB::AnimatedSprite::update(elapsedTime);
 	PhysicalObject::update(elapsedTime);
 }

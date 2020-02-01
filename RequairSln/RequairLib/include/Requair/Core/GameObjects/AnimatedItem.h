@@ -4,6 +4,8 @@
 
 #include <GameBackbone/Core/AnimatedSprite.h>
 
+#include <SFML/Graphics/Texture.hpp>
+
 namespace REQ
 {
 	class libRequair AnimatedItem : public Item, public GB::AnimatedSprite
