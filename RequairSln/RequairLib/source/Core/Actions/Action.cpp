@@ -1,8 +1,10 @@
 #include <Requair/Core/Actions/Action.h>
 
+#include <utility>
+
 using namespace REQ;
 
-Action::Action() : m_isFinished(false), m_nextAction(nullptr) {}
+Action::Action() : m_isFinished(false) {}
 
 bool Action::Perform(sf::Int64 elapsedTime)
 {
@@ -13,10 +15,10 @@ bool Action::Perform(sf::Int64 elapsedTime)
     return false;
 }
 
-Action& Action::Then(Action& nextAction)
+Action& Action::Then(std::unique_ptr<Action> nextAction)
 {
-    m_nextAction = &nextAction;
-    return nextAction;
+    m_nextAction = std::move(nextAction);
+    return *(m_nextAction.get());
 };
 
 void Action::update(sf::Int64 elapsedTime)

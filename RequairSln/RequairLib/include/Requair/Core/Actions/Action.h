@@ -4,6 +4,8 @@
 
 #include <GameBackbone/Core/Updatable.h>
 
+#include <memory>
+
 
 namespace REQ
 {
@@ -13,7 +15,7 @@ namespace REQ
         Action::Action();
 
         virtual bool Perform(sf::Int64 elapsedTime);
-        virtual Action& Then(Action& nextAction);
+        virtual Action& Then(std::unique_ptr<Action> nextAction);
 
         void update(sf::Int64 elapsedTime) override;
 
@@ -21,6 +23,6 @@ namespace REQ
         bool m_isFinished;
 
     private:
-        Action* m_nextAction;
+        std::unique_ptr<Action> m_nextAction;
     };
 }

@@ -4,7 +4,9 @@ cmake_minimum_required (VERSION 3.8)
 add_library(Requair SHARED
   "include/Requair.h"
   "include/Requair/Core/Actions/Action.h"
+  "include/Requair/Core/Actions/ActionParser.h"
   "include/Requair/Core/Actions/AnimationAction.h"
+  "include/Requair/Core/Actions/ForkAction.h"
   "include/Requair/Core/Actions/MoveAction.h"
   "include/Requair/Core/EventController.h"
   "include/Requair/Core/Regions/BossRegion.h"
@@ -17,7 +19,9 @@ add_library(Requair SHARED
   
   
   "source/Core/Actions/Action.cpp"
+  "source/Core/Actions/ActionParser.cpp"
   "source/Core/Actions/AnimationAction.cpp"
+  "source/Core/Actions/ForkAction.cpp"
   "source/Core/Actions/MoveAction.cpp"
   "source/Core/EventController.cpp"
   "source/Core/Regions/BossRegion.cpp"

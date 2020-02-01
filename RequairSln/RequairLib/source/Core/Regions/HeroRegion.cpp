@@ -12,7 +12,7 @@ const int GridSize = 128;
 
 using namespace REQ;
 
-HeroRegion::HeroRegion(std::string jsonFile) : RuntimeRegion(jsonFile)
+HeroRegion::HeroRegion(const std::string& jsonFile) : RuntimeRegion(jsonFile)
 {
 	spriteSheet.loadFromFile(R"(Textures/boss_man_walk.png)");;
 

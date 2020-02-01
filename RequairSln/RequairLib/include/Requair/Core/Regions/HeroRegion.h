@@ -21,7 +21,7 @@ namespace REQ
     class libRequair HeroRegion : public RuntimeRegion
     {
     public:
-        HeroRegion(std::string jsonFile);
+        HeroRegion(const std::string& jsonFile);
         HeroRegion() = delete;
 
         void update(sf::Int64 elapsedTime) override;
