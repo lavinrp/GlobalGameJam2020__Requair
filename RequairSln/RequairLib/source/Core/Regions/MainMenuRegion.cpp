@@ -6,3 +6,7 @@ MainMenuRegion::MainMenuRegion()
 {
 
 }
+
+void MainMenuRegion::HandleEvent(sf::Event& even) {
+
+}

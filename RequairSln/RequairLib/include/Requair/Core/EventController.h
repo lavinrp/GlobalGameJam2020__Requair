@@ -2,7 +2,7 @@
 
 #include <Requair/Utils/DllUtils.h>
 #include <Requair/Core/Regions/TemplateRegion.h>
-
+#include <memory>
 #include <GameBackbone/Core/CoreEventController.h>
 
 
@@ -24,6 +24,7 @@ namespace REQ
 
 	private:
 		sf::View camera;
-		TemplateRegion mainRegion;
+		// TemplateRegion mainRegion;
+		std::unique_ptr<TemplateRegion> mainRegion;
 	};
 }

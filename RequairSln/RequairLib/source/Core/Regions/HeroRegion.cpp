@@ -6,3 +6,7 @@ HeroRegion::HeroRegion(std::string jsonFile) : RuntimeRegion(jsonFile)
 {
 
 }
+
+void HeroRegion::HandleEvent(sf::Event& event) {
+
+}

@@ -2,6 +2,8 @@
 
 #include <Requair/Utils/DllUtils.h>
 
+#include <SFML/Window/Event.hpp>
+
 #include <GameBackbone/Core/GameRegion.h>
 
 
@@ -11,5 +13,6 @@ namespace REQ
     {
     public:
         using GB::GameRegion::GameRegion;
+		virtual void HandleEvent(sf::Event& even) = 0;
     };
 }
