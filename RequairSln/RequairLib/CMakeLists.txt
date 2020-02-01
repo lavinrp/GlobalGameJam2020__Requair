@@ -16,6 +16,7 @@ add_library(Requair SHARED
   "include/Requair/Utils/json.hpp"
   
   
+  "source/Core/Actions/Action.cpp"
   "source/Core/Actions/AnimationAction.cpp"
   "source/Core/Actions/MoveAction.cpp"
   "source/Core/EventController.cpp"

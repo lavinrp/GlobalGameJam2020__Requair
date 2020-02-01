@@ -1,13 +1,22 @@
 #include <Requair/Core/Actions/MoveAction.h>
 
+#include <GameBackbone/Navigation/NavigationTools.h>
+
 using namespace REQ;
 
-MoveAction::MoveAction(GB::AnimatedSprite& thingToMove) : AnimationAction(thingToMove) {}
+MoveAction::MoveAction(GB::AnimatedSprite& thingToMove, sf::Vector2f startPoint, sf::Vector2f endPoint) 
+    : AnimationAction(thingToMove), m_startPoint(startPoint), m_endPoint(endPoint) {}
 
-void MoveAction::update(sf::Int64 elapsedTime)
+bool MoveAction::Perform(sf::Int64 elapsedTime)
 {
-    // Forward to Animation
-    AnimationAction::update(elapsedTime);
+    if (!Action::Perform(elapsedTime))
+    {
+        GB::moveSpriteStepTowardsPoint(m_thingToAnimate, m_endPoint, 0.5f, false);
 
-    // TODO: Do our Movement
+        if (m_thingToAnimate.getPosition() == m_endPoint)
+        {
+            m_isFinished = true;
+        }
+    }
+    return true;
 }

@@ -12,11 +12,12 @@ namespace REQ
     {
     public:
         AnimationAction() = delete;
-        AnimationAction(GB::AnimatedSprite& thingToAnimate);
+        AnimationAction(GB::AnimatedSprite& thingToAnimate, bool shouldStop = false);
 
-        void update(sf::Int64 elapsedTime) override;
+        bool Perform(sf::Int64 elapsedTime) override;
 
     protected:
         GB::AnimatedSprite& m_thingToAnimate;
+        bool m_shouldStop;
     };
 }

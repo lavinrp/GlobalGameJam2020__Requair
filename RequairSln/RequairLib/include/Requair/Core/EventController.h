@@ -5,6 +5,8 @@
 
 #include <GameBackbone/Core/CoreEventController.h>
 
+#include <memory>
+
 
 namespace REQ
 {
@@ -24,6 +26,6 @@ namespace REQ
 
 	private:
 		sf::View camera;
-		TemplateRegion mainRegion;
+		std::unique_ptr<TemplateRegion> mainRegion;
 	};
 }
