@@ -4,6 +4,10 @@ cmake_minimum_required (VERSION 3.8)
 add_library(Requair SHARED
   "include/Requair.h"
   "include/Requair/Core/EventController.h"
+  "include/Requair/Core/GameObjects/InteractiveObject.h"
+  "include/Requair/Core/GameObjects/Item.h"
+  "include/Requair/Core/GameObjects/PhysicalObject.h"
+  "include/Requair/Core/GameObjects/Pot.h"
   "include/Requair/Core/Regions/BossRegion.h"
   "include/Requair/Core/Regions/HeroRegion.h"
   "include/Requair/Core/Regions/MainMenuRegion.h"
@@ -14,6 +18,9 @@ add_library(Requair SHARED
   
   
   "source/Core/EventController.cpp"
+  "source/Core/GameObjects/Item.cpp"
+  "source/Core/GameObjects/PhysicalObject.cpp"
+  "source/Core/GameObjects/Pot.cpp"
   "source/Core/Regions/BossRegion.cpp"
   "source/Core/Regions/HeroRegion.cpp"
   "source/Core/Regions/MainMenuRegion.cpp"
