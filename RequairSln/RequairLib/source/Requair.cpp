@@ -7,8 +7,6 @@
 using namespace REQ;
 Requair::Requair()
 {
-	Pot p(10, 10);
-
 	// Initialize an instance of DemoCoreEventController
 	EventController controller;
 	// Start the loop on the DemoCoreEventController to start the Demo

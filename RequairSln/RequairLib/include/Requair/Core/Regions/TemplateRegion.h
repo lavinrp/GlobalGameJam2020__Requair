@@ -3,6 +3,7 @@
 #include <Requair/Utils/DllUtils.h>
 
 #include <GameBackbone/Core/GameRegion.h>
+#include <Requair/Core/GameObjects/Pot.h>
 
 
 namespace REQ
