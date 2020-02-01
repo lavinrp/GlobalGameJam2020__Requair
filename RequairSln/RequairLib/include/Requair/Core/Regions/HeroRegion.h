@@ -3,6 +3,7 @@
 #include <Requair/Utils/DllUtils.h>
 
 #include <Requair/Core/Actions/MoveAction.h>
+//#include <Requair/Core/Actions/AnimationAction.h>
 #include <Requair/Core/Regions/RuntimeRegion.h>
 
 #include <GameBackbone/Core/AnimatedSprite.h>
@@ -28,7 +29,7 @@ namespace REQ
     private:
         // Hero
         GB::AnimatedSprite m_hero;
-        std::unique_ptr<AnimationAction> m_action;
+        std::unique_ptr<MoveAction> m_action;
 
         // ActionSet = Start Point, End Point, Action, Other Sprite/Object that moves?
         /*using ActionSet = std::tuple<sf::Vector2f, sf::Vector2f, int>;

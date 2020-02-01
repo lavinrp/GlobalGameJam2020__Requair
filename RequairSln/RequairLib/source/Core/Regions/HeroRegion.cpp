@@ -19,7 +19,7 @@ HeroRegion::HeroRegion(std::string jsonFile) : RuntimeRegion(jsonFile)
 	GB::UniformAnimationSet::Ptr uniformAnimationSet = std::make_shared<GB::UniformAnimationSet>(sf::Vector2i(GridSize, GridSize));
 	// Add an animation to the UniformAnimationSet
 	uniformAnimationSet->addAnimation({
-		{0, 0},		// Top left of the texture
+		//{0, 0},		// Top left of the texture
 		{1, 0},		// Top middle of the texture
 		{2, 0},		// Top right of the texture
 		});
@@ -29,20 +29,19 @@ HeroRegion::HeroRegion(std::string jsonFile) : RuntimeRegion(jsonFile)
 	m_hero.setAnimations(uniformAnimationSet);
 
 	// Move the AnimatedSprite
-	m_hero.move(50, 50);
+	m_hero.move(150.0f, 0.0f);
 	// Tell the AnimatedSprite to update every one second
-	m_hero.setAnimationDelay(sf::seconds(1));
+	m_hero.setAnimationDelay(sf::seconds(0.3));
 	// Tell the AnimatedSprite to begin running its second animation
 	// The animation will reverse directions every time it reaches the beginning or end
-	m_hero.runAnimation(0, GB::ANIMATION_END_TYPE::ANIMATION_STOP);
-
+	m_hero.runAnimation(0, GB::ANIMATION_END_TYPE::ANIMATION_LOOP);
 
 
 	// Tell the region to draw the AnimatedSprite
 	addDrawable(1, &m_hero);
 	
 
-	m_action = std::make_unique<AnimationAction>(m_hero, true);
+	m_action = std::make_unique<MoveAction>(m_hero, sf::Vector2f{ 150.0f,50.0f }, sf::Vector2f{ 150.0f, 550.0f });
 
 	/*MoveAction banana{ m_hero, sf::Vector2f{ 0.0f, 0.0f }, sf::Vector2f{ 10.0f, 10.0f } };
 	banana.Then(MoveAction{ GB::AnimatedSprite{}, sf::Vector2f{ 0.0f, 0.0f }, sf::Vector2f{ 10.0f, 10.0f } })

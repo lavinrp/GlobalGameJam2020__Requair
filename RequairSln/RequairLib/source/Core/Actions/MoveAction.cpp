@@ -9,9 +9,9 @@ MoveAction::MoveAction(GB::AnimatedSprite& thingToMove, sf::Vector2f startPoint,
 
 bool MoveAction::Perform(sf::Int64 elapsedTime)
 {
-    if (!Action::Perform(elapsedTime))
+    if (!AnimationAction::Perform(elapsedTime))
     {
-        GB::moveSpriteStepTowardsPoint(m_thingToAnimate, m_endPoint, 0.5f, false);
+        GB::moveSpriteStepTowardsPoint(m_thingToAnimate, m_endPoint, 0.1f, false);
 
         if (m_thingToAnimate.getPosition() == m_endPoint)
         {
