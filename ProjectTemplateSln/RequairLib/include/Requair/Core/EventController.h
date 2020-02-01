@@ -1,14 +1,14 @@
 #pragma once
 
-#include <ProjectTemplate/Utils/DllUtils.h>
-#include <ProjectTemplate/Core/Regions/TemplateRegion.h>
+#include <Requair/Utils/DllUtils.h>
+#include <Requair/Core/Regions/TemplateRegion.h>
 
 #include <GameBackbone/Core/CoreEventController.h>
 
 
 namespace PT
 {
-	class libProjectTemplate EventController final : public GB::CoreEventController
+	class libRequair EventController final : public GB::CoreEventController
 	{
 	public:
 		// Constructors

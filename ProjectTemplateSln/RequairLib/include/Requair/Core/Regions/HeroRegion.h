@@ -1,8 +1,8 @@
 #pragma once
 
-#include <ProjectTemplate/Utils/DllUtils.h>
+#include <Requair/Utils/DllUtils.h>
 
-#include <ProjectTemplate/Core/Regions/RuntimeRegion.h>
+#include <Requair/Core/Regions/RuntimeRegion.h>
 
 #include <GameBackbone/Core/AnimatedSprite.h>
 
@@ -14,7 +14,7 @@
 
 namespace PT
 {
-    class libProjectTemplate HeroRegion : public RuntimeRegion
+    class libRequair HeroRegion : public RuntimeRegion
     {
     public:
         HeroRegion(std::string jsonFile);

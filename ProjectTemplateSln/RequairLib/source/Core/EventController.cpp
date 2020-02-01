@@ -1,10 +1,10 @@
-#include <ProjectTemplate/Core/EventController.h>
+#include <Requair/Core/EventController.h>
 
 #include <string>
 
 using namespace PT;
 
-#define APP_NAME "ProjectTemplate"
+#define APP_NAME "Requair"
 
 EventController::EventController() : CoreEventController(APP_NAME), mainRegion()
 {

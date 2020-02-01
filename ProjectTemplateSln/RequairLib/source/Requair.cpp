@@ -1,9 +1,9 @@
-#include <ProjectTemplate.h>
+#include <Requair.h>
 
-#include <ProjectTemplate/Core/EventController.h>
+#include <Requair/Core/EventController.h>
 
 using namespace PT;
-ProjectTemplate::ProjectTemplate()
+Requair::Requair()
 {
 	// Initialize an instance of DemoCoreEventController
 	EventController controller;

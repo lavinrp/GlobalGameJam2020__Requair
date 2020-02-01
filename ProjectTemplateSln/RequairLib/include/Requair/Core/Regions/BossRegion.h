@@ -1,13 +1,13 @@
 #pragma once
 
-#include <ProjectTemplate/Utils/DllUtils.h>
+#include <Requair/Utils/DllUtils.h>
 
-#include <ProjectTemplate/Core/Regions/RuntimeRegion.h>
+#include <Requair/Core/Regions/RuntimeRegion.h>
 
 
 namespace PT
 {
-    class libProjectTemplate BossRegion : public RuntimeRegion
+    class libRequair BossRegion : public RuntimeRegion
     {
     public:
         BossRegion(std::string jsonFile);

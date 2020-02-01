@@ -1,12 +1,12 @@
 cmake_minimum_required(VERSION 3.8)
-project(ProjectTemplate VERSION 0.1.0)
+project(Requair VERSION 0.1.0)
 set (CMAKE_CXX_STANDARD 17)
 
 
 enable_testing()
 
 # top project folder
-set(PROJECTTEMPLATE_TOP_FOLDER ${CMAKE_CURRENT_SOURCE_DIR})
+set(REQUAIR_TOP_FOLDER ${CMAKE_CURRENT_SOURCE_DIR})
 
 # project wide output directories
 set(BUILD_DIR ${CMAKE_CURRENT_SOURCE_DIR}/build)
@@ -23,5 +23,5 @@ if(NOT CMAKE_DEBUG_POSTFIX)
   set(CMAKE_DEBUG_POSTFIX -d)
 endif()
 
-add_subdirectory("ProjectTemplateExe")
-add_subdirectory("ProjectTemplateLib")
+add_subdirectory("RequairExe")
+add_subdirectory("RequairLib")

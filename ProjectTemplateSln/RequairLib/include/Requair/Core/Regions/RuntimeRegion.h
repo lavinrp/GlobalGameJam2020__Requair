@@ -1,15 +1,15 @@
 #pragma once
 
-#include <ProjectTemplate/Utils/DllUtils.h>
+#include <Requair/Utils/DllUtils.h>
 
-#include <ProjectTemplate/Core/Regions/TemplateRegion.h>
+#include <Requair/Core/Regions/TemplateRegion.h>
 
 #include <string>
 
 
 namespace PT
 {
-    class libProjectTemplate RuntimeRegion : public TemplateRegion
+    class libRequair RuntimeRegion : public TemplateRegion
     {
     public:
         RuntimeRegion(std::string jsonFile);
