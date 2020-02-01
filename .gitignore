@@ -16,3 +16,5 @@ ProjectTemplateSln/PT_BuildVars\.txt
 ProjectTemplateSln/\.vscode/settings\.json
 ProjectTemplateSln/\.vscode/
 ProjectTemplateSln/CMakeSettings\.json/
+ProjectTemplateSln/out/build
+ProjectTemplateSln/CMakeSettings.json
