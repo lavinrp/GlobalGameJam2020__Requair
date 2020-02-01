@@ -1,4 +1,4 @@
-#include <ProjectTemplate/Core/HeroRegion.h>
+#include <ProjectTemplate/Core/Regions/HeroRegion.h>
 
 using namespace PT;
 

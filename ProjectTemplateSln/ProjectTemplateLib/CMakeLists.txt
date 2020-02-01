@@ -3,22 +3,22 @@
 cmake_minimum_required (VERSION 3.8)
 add_library(ProjectTemplate SHARED
   "include/ProjectTemplate.h"
-  "include/ProjectTemplate/Core/BossRegion.h"
   "include/ProjectTemplate/Core/EventController.h"
-  "include/ProjectTemplate/Core/HeroRegion.h"
-  "include/ProjectTemplate/Core/MainMenuRegion.h"
-  "include/ProjectTemplate/Core/RuntimeRegion.h"
-  "include/ProjectTemplate/Core/TemplateRegion.h"
+  "include/ProjectTemplate/Core/Regions/BossRegion.h"
+  "include/ProjectTemplate/Core/Regions/HeroRegion.h"
+  "include/ProjectTemplate/Core/Regions/MainMenuRegion.h"
+  "include/ProjectTemplate/Core/Regions/RuntimeRegion.h"
+  "include/ProjectTemplate/Core/Regions/TemplateRegion.h"
   "include/ProjectTemplate/Utils/DllUtils.h"
   "include/ProjectTemplate/Utils/json.hpp"
   
   
-  "source/Core/BossRegion.cpp"
   "source/Core/EventController.cpp"
-  "source/Core/HeroRegion.cpp"
-  "source/Core/MainMenuRegion.cpp"
-  "source/Core/RuntimeRegion.cpp"
-  "source/Core/TemplateRegion.cpp"
+  "source/Core/Regions/BossRegion.cpp"
+  "source/Core/Regions/HeroRegion.cpp"
+  "source/Core/Regions/MainMenuRegion.cpp"
+  "source/Core/Regions/RuntimeRegion.cpp"
+  "source/Core/Regions/TemplateRegion.cpp"
   "source/ProjectTemplate.cpp"
 )
 set_target_properties(ProjectTemplate PROPERTIES DEBUG_POSTFIX ${CMAKE_DEBUG_POSTFIX})

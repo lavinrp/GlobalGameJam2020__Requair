@@ -1,4 +1,4 @@
-#include <ProjectTemplate/Core/BossRegion.h>
+#include <ProjectTemplate/Core/Regions/BossRegion.h>
 
 using namespace PT;
 

@@ -1,7 +1,7 @@
 #pragma once
 
 #include <ProjectTemplate/Utils/DllUtils.h>
-#include <ProjectTemplate/Core/TemplateRegion.h>
+#include <ProjectTemplate/Core/Regions/TemplateRegion.h>
 
 #include <GameBackbone/Core/CoreEventController.h>
 
