@@ -9,12 +9,14 @@ compile_commands.json
 CTestTestfile.cmake
 
 
-ProjectTemplateSln/build/
-ProjectTemplateSln/PT_BuildVars\.txt
+RequairSln/build/
+RequairSln/PT_BuildVars\.txt
 
 */.vs
-ProjectTemplateSln/\.vscode/settings\.json
-ProjectTemplateSln/\.vscode/
-ProjectTemplateSln/CMakeSettings\.json/
-ProjectTemplateSln/out/build
-ProjectTemplateSln/CMakeSettings.json
+RequairSln/\.vscode/settings\.json
+RequairSln/\.vscode/
+RequairSln/CMakeSettings\.json/
+RequairSln/out/build
+RequairSln/CMakeSettings.json
+
+RequairSln/build/bin/
