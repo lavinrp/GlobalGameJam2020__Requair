@@ -1,7 +1,6 @@
 #include <Requair/Core/Regions/RuntimeRegion.h>
 #include <Requair/Core/GameObjects/Pot.h>
 #include <Requair/Core/GameObjects/Item.h>
-#include <unistd.h>
 #include <string>
 #include <fstream>
 #include <streambuf>

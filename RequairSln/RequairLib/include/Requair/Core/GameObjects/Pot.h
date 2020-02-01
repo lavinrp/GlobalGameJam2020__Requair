@@ -25,7 +25,7 @@ namespace REQ
 			GB::AnimationSet::Ptr animSet = std::make_shared<GB::AnimationSet>();
 			animSet->addAnimation({ {0, 0, 400, 400} });
 			animSet->addAnimation({ {400, 0, 400, 400} });
-			return GB::AnimationSet::Ptr{};
+			return animSet;
 		} ();
 	};
 }
