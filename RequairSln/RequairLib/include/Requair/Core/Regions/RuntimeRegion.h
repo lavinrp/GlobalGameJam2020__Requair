@@ -1,6 +1,7 @@
 #pragma once
 
 #include <Requair/Utils/DllUtils.h>
+#include <Requair/Utils/json.hpp>
 
 #include <Requair/Core/Regions/TemplateRegion.h>
 
@@ -12,7 +13,7 @@ namespace REQ
     class libRequair RuntimeRegion : public TemplateRegion
     {
     public:
-        RuntimeRegion(std::string jsonFile);
+        RuntimeRegion(const std::string& jsonFile);
         RuntimeRegion() = delete;
 
     private:
