@@ -1,7 +1,7 @@
 #pragma once
 
 #include <Requair/Utils/DllUtils.h>
-#include <SFML/System/vector2.hpp>
+#include <SFML/System/Vector2.hpp>
 #include <SFML/Graphics/Rect.hpp>
 #include <GameBackbone/Core/Updatable.h>
 
