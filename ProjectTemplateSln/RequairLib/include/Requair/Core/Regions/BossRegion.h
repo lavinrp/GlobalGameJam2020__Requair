@@ -5,7 +5,7 @@
 #include <Requair/Core/Regions/RuntimeRegion.h>
 
 
-namespace PT
+namespace REQ
 {
     class libRequair BossRegion : public RuntimeRegion
     {

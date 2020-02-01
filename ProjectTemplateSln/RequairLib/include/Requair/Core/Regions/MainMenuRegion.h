@@ -5,7 +5,7 @@
 #include <Requair/Core/Regions/TemplateRegion.h>
 
 
-namespace PT
+namespace REQ
 {
     class libRequair MainMenuRegion : public TemplateRegion
     {

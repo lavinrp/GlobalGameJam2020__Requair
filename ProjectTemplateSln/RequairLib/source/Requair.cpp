@@ -2,7 +2,7 @@
 
 #include <Requair/Core/EventController.h>
 
-using namespace PT;
+using namespace REQ;
 Requair::Requair()
 {
 	// Initialize an instance of DemoCoreEventController

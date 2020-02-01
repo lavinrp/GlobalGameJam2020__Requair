@@ -7,7 +7,7 @@
 #include <string>
 
 
-namespace PT
+namespace REQ
 {
     class libRequair RuntimeRegion : public TemplateRegion
     {

@@ -6,7 +6,7 @@
 #include <GameBackbone/Core/CoreEventController.h>
 
 
-namespace PT
+namespace REQ
 {
 	class libRequair EventController final : public GB::CoreEventController
 	{

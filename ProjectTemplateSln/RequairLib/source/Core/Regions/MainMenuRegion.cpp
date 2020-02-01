@@ -1,6 +1,6 @@
 #include <Requair/Core/Regions/MainMenuRegion.h>
 
-using namespace PT;
+using namespace REQ;
 
 MainMenuRegion::MainMenuRegion()
 {

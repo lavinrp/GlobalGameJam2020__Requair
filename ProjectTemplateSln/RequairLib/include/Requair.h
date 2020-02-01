@@ -2,7 +2,7 @@
 
 #include <Requair/Utils/DllUtils.h>
 
-namespace PT 
+namespace REQ 
 {
 	class libRequair Requair
 	{

@@ -5,7 +5,7 @@
 #include <GameBackbone/Core/GameRegion.h>
 
 
-namespace PT
+namespace REQ
 {
     class libRequair TemplateRegion : public GB::GameRegion
     {

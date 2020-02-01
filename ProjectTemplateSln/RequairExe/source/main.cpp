@@ -4,6 +4,6 @@
 
 int main()
 {
-	PT::Requair newGame;
+	REQ::Requair newGame;
 	return 0;
 }

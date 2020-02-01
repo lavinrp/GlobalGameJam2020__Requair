@@ -12,7 +12,7 @@
 #include <vector>
 
 
-namespace PT
+namespace REQ
 {
     class libRequair HeroRegion : public RuntimeRegion
     {

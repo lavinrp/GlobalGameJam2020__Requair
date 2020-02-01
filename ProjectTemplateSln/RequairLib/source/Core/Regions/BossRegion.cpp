@@ -1,6 +1,6 @@
 #include <Requair/Core/Regions/BossRegion.h>
 
-using namespace PT;
+using namespace REQ;
 
 BossRegion::BossRegion(std::string jsonFile) : RuntimeRegion(jsonFile)
 {
