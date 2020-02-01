@@ -3,6 +3,7 @@
 cmake_minimum_required (VERSION 3.8)
 add_library(Requair SHARED
   "include/Requair.h"
+  "include/Requair/Core/Boss/Boss.h"
   "include/Requair/Core/EventController.h"
   "include/Requair/Core/Regions/BossRegion.h"
   "include/Requair/Core/Regions/HeroRegion.h"
@@ -12,7 +13,7 @@ add_library(Requair SHARED
   "include/Requair/Utils/DllUtils.h"
   "include/Requair/Utils/json.hpp"
   
-  
+  "source/Core/Boss/Boss.cpp"
   "source/Core/EventController.cpp"
   "source/Core/Regions/BossRegion.cpp"
   "source/Core/Regions/HeroRegion.cpp"
