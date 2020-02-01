@@ -3,6 +3,9 @@
 cmake_minimum_required (VERSION 3.8)
 add_library(Requair SHARED
   "include/Requair.h"
+  "include/Requair/Core/Actions/Action.h"
+  "include/Requair/Core/Actions/AnimationAction.h"
+  "include/Requair/Core/Actions/MoveAction.h"
   "include/Requair/Core/EventController.h"
   "include/Requair/Core/Regions/BossRegion.h"
   "include/Requair/Core/Regions/HeroRegion.h"
@@ -13,6 +16,8 @@ add_library(Requair SHARED
   "include/Requair/Utils/json.hpp"
   
   
+  "source/Core/Actions/AnimationAction.cpp"
+  "source/Core/Actions/MoveAction.cpp"
   "source/Core/EventController.cpp"
   "source/Core/Regions/BossRegion.cpp"
   "source/Core/Regions/HeroRegion.cpp"
