@@ -9,10 +9,14 @@
 
 using namespace REQ;
 
+
+
 RuntimeRegion::RuntimeRegion(const std::string& jsonFile)
 {
 	m_jsonFile = jsonFile;
-	auto [item_list, phycial_object_list] =  ProcessJson();
+	auto [item_list, physical_object_list] = ProcessJson();
+	this->item_list = std::move(item_list);
+	this->physical_object_list = std::move(physical_object_list);
 }
 
 std::pair<std::vector<std::unique_ptr<Item>>, std::vector<std::unique_ptr<PhysicalObject>>> RuntimeRegion::ProcessJson()
