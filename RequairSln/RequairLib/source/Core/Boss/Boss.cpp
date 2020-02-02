@@ -43,13 +43,13 @@ void Boss::update(sf::Int64 elapsedTime) {
 
 	// movement controls
 	auto moveVector = sf::Vector2f();
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Left))
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Left) || sf::Keyboard::isKeyPressed(sf::Keyboard::Key::A))
 		moveVector.x -= 1;
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Right))
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Right) || sf::Keyboard::isKeyPressed(sf::Keyboard::Key::D))
 		moveVector.x += 1;
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Up))
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Up) || sf::Keyboard::isKeyPressed(sf::Keyboard::Key::W))
 		moveVector.y -= 1;
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Down))
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Down) || sf::Keyboard::isKeyPressed(sf::Keyboard::Key::S))
 		moveVector.y += 1;
 	auto len = sqrt(moveVector.x * moveVector.x + moveVector.y * moveVector.y);
 	if (len > 1)
