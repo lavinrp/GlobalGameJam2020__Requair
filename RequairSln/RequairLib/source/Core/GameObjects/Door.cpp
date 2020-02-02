@@ -1,11 +1,15 @@
-#include <Requair/Core/GameObjects/Pot.h>
-#include <GameBackbone/Core/AnimatedSprite.h>
+#include <Requair/Core/GameObjects/Door.h>
+
+#include <Requair/Core/GameObjects/Item.h>
+#include <Requair/Core/GameObjects/AnimatedItem.h>
+
 
 using namespace REQ;
 
-Pot::Pot(float x, float y) : AnimatedItem(100),
-	m_broken(false)
+Door::Door(float x, float y) : AnimatedItem(1000),
+m_broken(false)
 {
+
 	this->setPosition(x, y);
 	this->setTexture(m_texture, true);
 	this->setAnimations(m_animations);
@@ -13,8 +17,9 @@ Pot::Pot(float x, float y) : AnimatedItem(100),
 	this->setAnimating(false);
 }
 
-void Pot::Interact(REQ::Boss& boss)
+void Door::Interact(Boss& boss)
 {
+
 	m_broken = !m_broken;
 	if (m_broken)
 	{
