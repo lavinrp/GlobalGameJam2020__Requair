@@ -4,11 +4,17 @@
 
 using namespace REQ;
 
-AnimationAction::AnimationAction(GB::AnimatedSprite& thingToAnimate, bool shouldStop) 
-    : m_thingToAnimate(thingToAnimate), m_shouldStop(shouldStop){}
+AnimationAction::AnimationAction(GB::AnimatedSprite& thingToAnimate, std::function<void(GB::AnimatedSprite&)> setup, bool shouldStop)
+    : m_thingToAnimate(thingToAnimate), m_setup(setup), m_doneSetup(false), m_shouldStop(shouldStop){}
 
 bool AnimationAction::Perform(sf::Int64 elapsedTime)
 {
+    if (!m_doneSetup)
+    {
+        m_setup(m_thingToAnimate);
+        m_doneSetup = true;
+    }
+
     if (!Action::Perform(elapsedTime))
     {
         // Do animation logic

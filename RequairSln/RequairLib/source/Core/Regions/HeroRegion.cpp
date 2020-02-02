@@ -19,6 +19,7 @@ using namespace REQ;
 HeroRegion::HeroRegion(const std::string& jsonFile, sf::RenderWindow& window) : TemplateRegion(), m_window(window)
 {
 	spriteSheet.loadFromFile(R"(Textures/Hero Boi/hero boi walk.png)");
+	spriteSheet2.loadFromFile(R"(Textures/Hero Boi/hero boi attack.png)");
 
 	GB::UniformAnimationSet::Ptr uniformAnimationSet = std::make_shared<GB::UniformAnimationSet>(sf::Vector2i(GridSize, GridSize));
 	// Add an animation to the UniformAnimationSet
@@ -26,6 +27,11 @@ HeroRegion::HeroRegion(const std::string& jsonFile, sf::RenderWindow& window) : 
 		//{0, 0},		// Top left of the texture
 		{1, 0},		// Top middle of the texture
 		{2, 0},		// Top right of the texture
+		});
+
+	uniformAnimationSet->addAnimation({
+		{0, 0},		// Top left of the texture
+		{1, 0},		// Top middle of the texture
 		});
 
 	// Create an AnimatedSprite to display the UniformAnimation
@@ -48,12 +54,22 @@ HeroRegion::HeroRegion(const std::string& jsonFile, sf::RenderWindow& window) : 
 	addDrawable(1, &m_hero);
 	addDrawable(1, &m_pot);
 	
+	auto MoveSetupFun = [&](GB::AnimatedSprite& animSprite) -> void
+	{
+		animSprite.setTexture(spriteSheet);
+		animSprite.runAnimation(0, GB::ANIMATION_END_TYPE::ANIMATION_LOOP);
+	};
+	auto SwipeSetupFun = [&](GB::AnimatedSprite& animSprite) -> void
+	{
+		animSprite.setTexture(spriteSheet2);
+		animSprite.runAnimation(1, GB::ANIMATION_END_TYPE::ANIMATION_STOP);
+	};
 
-	m_action = std::make_unique<MoveAction>(m_hero, sf::Vector2f{ 7*128, 3 * 128 });
-	m_action->Then(std::make_unique<MoveAction>(m_hero, sf::Vector2f{ 10 * 128, 3 * 128 }))
+	m_action = std::make_unique<MoveAction>(m_hero, sf::Vector2f{ 7*128, 3 * 128 }, MoveSetupFun);
+	m_action->Then(std::make_unique<MoveAction>(m_hero, sf::Vector2f{ 10 * 128, 3 * 128 }, MoveSetupFun))
 		.Then(std::make_unique<ForkAction>(
-			std::make_unique<MoveAction>(m_hero, sf::Vector2f{ 10 * 128, 5 * 128 }),
-			std::make_unique<MoveAction>(m_pot, sf::Vector2f{ 10 * 128, 1 * 128 })
+			std::make_unique<AnimationAction>(std::move(std::make_unique<MoveAction>(m_hero, sf::Vector2f{ 10 * 128, 5 * 128 }, MoveSetupFun)->Then(std::make_unique<AnimationAction>(m_hero, SwipeSetupFun, true)))),
+			std::make_unique<MoveAction>(m_pot, sf::Vector2f{ 10 * 128, 1 * 128 }, MoveSetupFun)
 		));
 
 

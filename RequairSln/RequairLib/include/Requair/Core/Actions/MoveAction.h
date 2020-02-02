@@ -13,7 +13,7 @@ namespace REQ
     {
     public:
         MoveAction() = delete;
-        MoveAction(GB::AnimatedSprite& thingToMove, sf::Vector2f endPoint);
+        MoveAction(GB::AnimatedSprite& thingToMove, sf::Vector2f endPoint, std::function<void(GB::AnimatedSprite&)> setup);
 
         bool Perform(sf::Int64 elapsedTime) override;
 

@@ -41,5 +41,6 @@ namespace REQ
 
         sf::RenderWindow& m_window;
         sf::Texture spriteSheet;
+        sf::Texture spriteSheet2;
     };
 }
