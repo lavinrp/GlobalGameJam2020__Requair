@@ -14,6 +14,13 @@ using namespace REQ;
 
 HeroRegion::HeroRegion(const std::string& jsonFile) : TemplateRegion()
 {
+	m_music = std::make_unique<sf::Music>();
+	if (m_music->openFromFile(R"(Music/fight.wav)"))
+	{
+		m_music->play();
+		m_music->setLoop(true);
+	}
+
 	spriteSheet.loadFromFile(R"(Textures/boss_man_walk.png)");
 
 	GB::UniformAnimationSet::Ptr uniformAnimationSet = std::make_shared<GB::UniformAnimationSet>(sf::Vector2i(GridSize, GridSize));

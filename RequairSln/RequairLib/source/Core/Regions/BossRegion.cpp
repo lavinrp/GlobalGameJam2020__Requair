@@ -3,6 +3,8 @@
 #include <Requair/Utils/JsonParserUtil.h>
 #include <Requair/Utils/json.hpp>
 
+#include <SFML/Audio/Music.hpp>
+
 #include <algorithm>
 #include <fstream>
 #include <streambuf>
@@ -11,6 +13,13 @@ using namespace REQ;
 
 BossRegion::BossRegion(std::string jsonFile) : m_jsonFile(std::move(jsonFile))
 {
+	m_music = std::make_unique<sf::Music>();
+	if (m_music->openFromFile(R"(Music/chill.wav)"))
+	{
+		m_music->play();
+		m_music->setLoop(true);
+	}
+
 	auto [item_list, physical_object_list] = ProcessJson();
 	m_item_list = std::move(item_list);
 	m_physical_object_list = std::move(physical_object_list);
