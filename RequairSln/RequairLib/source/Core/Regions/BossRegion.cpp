@@ -14,7 +14,7 @@
 
 using namespace REQ;
 
-BossRegion::BossRegion(std::string jsonFile) : m_jsonFile(std::move(jsonFile))
+BossRegion::BossRegion(std::string jsonFile, sf::RenderWindow& window) : m_jsonFile(std::move(jsonFile)), m_window(window)
 {
 	auto [item_list, physical_object_list] = ProcessJson();
 	m_item_list = std::move(item_list);
@@ -90,6 +90,19 @@ void BossRegion::HandleEvent(sf::Event& event)
 				}
 			}
 		}
+		else if (event.key.code == sf::Keyboard::Key::RBracket)
+		{
+			sf::View view = m_window.getView();
+			view.zoom(1.1f);
+			m_window.setView(view);
+		}
+		else if (event.key.code == sf::Keyboard::Key::LBracket)
+		{
+			sf::View view = m_window.getView();
+			view.zoom(0.9f);
+			m_window.setView(view);
+		}
+
 	}
 }
 
@@ -151,4 +164,8 @@ void BossRegion::update(sf::Int64 elapsedTime)
 {
 	TemplateRegion::update(elapsedTime);
 	boss.update(elapsedTime);
+
+	sf::View view = m_window.getView();
+	view.setCenter(boss.getPosition());
+	m_window.setView(view);
 }
