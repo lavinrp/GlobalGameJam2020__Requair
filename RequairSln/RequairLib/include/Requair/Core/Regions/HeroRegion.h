@@ -29,6 +29,14 @@ namespace REQ
         void update(sf::Int64 elapsedTime) override;
 
     private:
+        using ItemPointerVec = std::vector<std::unique_ptr<Item>>;
+        using PhysicalObjectPtrVec = std::vector<std::unique_ptr<PhysicalObject>>;
+
+        ItemPointerVec m_item_list;
+        PhysicalObjectPtrVec m_physical_object_list;
+        std::pair< ItemPointerVec, PhysicalObjectPtrVec > ProcessJson(const std::string& jsonFile);
+
+
         // Hero
         GB::AnimatedSprite m_hero;
         GB::AnimatedSprite m_boss;

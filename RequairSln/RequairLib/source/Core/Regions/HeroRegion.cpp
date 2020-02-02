@@ -4,6 +4,9 @@
 #include <Requair/Core/Actions/AnimationAction.h>
 #include <Requair/Core/Actions/ForkAction.h>
 #include <Requair/Core/Actions/MoveAction.h>
+#include <Requair/Core/GameObjects/Floor.h>
+#include <Requair/Core/GameObjects/Wall.h>
+#include <Requair/Utils/json.hpp>
 
 #include <GameBackbone/Core/UniformAnimationSet.h>
 
@@ -11,6 +14,9 @@
 
 #include <memory>
 #include <iostream>
+
+#include <fstream>
+#include <streambuf>
 
 const int GridSize = 128;
 
@@ -23,6 +29,28 @@ HeroRegion::HeroRegion(const std::string& jsonFile, sf::RenderWindow& window) : 
 	{
 		m_music->play();
 		m_music->setLoop(true);
+	}
+
+	auto [item_list, physical_object_list] = ProcessJson(jsonFile);
+	m_item_list = std::move(item_list);
+	m_physical_object_list = std::move(physical_object_list);
+
+	for (const auto& item : m_item_list)
+	{
+		sf::Drawable* drawableItem = dynamic_cast<sf::Drawable*>(item.get());
+		if (drawableItem)
+		{
+			addDrawable(1, drawableItem);
+		}
+	}
+	for (const auto& object : m_physical_object_list)
+	{
+		sf::Drawable* drawableItem = dynamic_cast<sf::Drawable*>(object.get());
+		if (drawableItem)
+		{
+
+			addDrawable(0, drawableItem);
+		}
 	}
 
 	m_heroSpriteSheet.loadFromFile(R"(Textures/Hero Boi/HeroFull.png)");
@@ -51,7 +79,7 @@ HeroRegion::HeroRegion(const std::string& jsonFile, sf::RenderWindow& window) : 
 	// Create an AnimatedSprite to display the UniformAnimation
 	m_hero.setTexture(m_heroSpriteSheet);
 	m_hero.setAnimations(heroAnimationSet);
-	m_hero.setPosition(10 * GridSize, 3 * GridSize);
+	m_hero.setPosition(10 * GridSize, 2 * GridSize);
 	m_hero.setAnimationDelay(sf::seconds(0.3));
 
 
@@ -98,7 +126,7 @@ HeroRegion::HeroRegion(const std::string& jsonFile, sf::RenderWindow& window) : 
 
 	m_boss.setTexture(m_bossSpriteSheet);
 	m_boss.setAnimations(bossAnimationSet);
-	m_boss.setPosition(1 * GridSize, 2 * GridSize);
+	m_boss.setPosition(2 * GridSize, 2 * GridSize);
 	m_boss.setAnimationDelay(sf::seconds(0.3));
 
 	GB::UniformAnimationSet::Ptr armLegAnimationSet = std::make_shared<GB::UniformAnimationSet>(sf::Vector2i(GridSize, GridSize));
@@ -200,10 +228,73 @@ void HeroRegion::update(sf::Int64 elapsedTime)
 	m_action->update(elapsedTime);
 
 	sf::View view = m_window.getView();
+	//view.setCenter(m_boss.getPosition());
 	view.setCenter(m_hero.getPosition());
 	m_window.setView(view);
 }
 
 void HeroRegion::HandleEvent(sf::Event& event) {
 
+}
+
+std::pair<std::vector<std::unique_ptr<Item>>, std::vector<std::unique_ptr<PhysicalObject>>> HeroRegion::ProcessJson(const std::string& jsonFile)
+{
+	// read file
+	std::ifstream t(jsonFile);
+	nlohmann::json levelJson = nlohmann::json::parse(t);
+	float tile_x_length = static_cast<float>(levelJson["tileheight"]);
+	float tile_y_length = static_cast<float>(levelJson["tilewidth"]);
+
+	auto layers = levelJson["layers"];
+	int x_tile_no(0), y_tile_no(0);
+
+	std::vector <std::unique_ptr<Item>> item_list;
+	std::vector <std::unique_ptr<PhysicalObject>> physical_object_list;
+	for (auto& layer : layers) {
+		auto chunks = layer["chunks"];
+
+		for (auto& chunk : chunks) {
+			x_tile_no = chunk["width"];
+			y_tile_no = chunk["height"];
+			auto data = chunk["data"];
+			int x_loc(0), y_loc(0);
+			float x_pos = static_cast<float>(chunk["x"]);
+			float y_pos = static_cast<float>(chunk["y"]);
+
+			for (auto& tile : data)
+			{
+				if (tile == 3) //pot
+				{
+					item_list.push_back(std::make_unique<Floor>((x_pos + x_loc) * tile_x_length, (y_pos + y_loc) * tile_y_length));
+				}
+				else if (tile == 2) //wall
+				{
+					physical_object_list.push_back(std::make_unique<Wall>((x_pos + x_loc) * tile_x_length, (y_pos + y_loc) * tile_y_length));
+				}
+				else if (tile == 1) //arm
+				{
+				}
+				else if (tile == 4) //leg
+				{
+				}
+				else if (tile == 5) //keys
+				{
+				}
+
+
+				if ((x_loc + 1) % x_tile_no == 0)
+				{
+					y_loc = y_loc + 1;
+					x_loc = 0;
+				}
+				else
+				{
+					x_loc = x_loc + 1;
+				}
+			}
+
+		}
+	}
+
+	return std::make_pair(std::move(item_list), std::move(physical_object_list));
 }
