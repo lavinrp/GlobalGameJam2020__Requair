@@ -117,7 +117,7 @@ std::pair<std::vector<std::unique_ptr<Item>>, std::vector<std::unique_ptr<Physic
 	auto layers = levelJson["layers"];
 	int x_tile_no(0), y_tile_no(0);
 
-	std::vector <std::unique_ptr<Item>> m_item_list;
+	std::vector <std::unique_ptr<Item>> item_list;
 	std::vector <std::unique_ptr<PhysicalObject>> physical_object_list;
 	for (auto& layer : layers) {
 		auto chunks = layer["chunks"];
@@ -132,21 +132,29 @@ std::pair<std::vector<std::unique_ptr<Item>>, std::vector<std::unique_ptr<Physic
 
 			for (auto& tile : data)
 			{
-				if (tile == 0)
+				if (tile == 7) //pot
 				{
-					m_item_list.push_back(std::make_unique<Pot>(x_pos + (x_loc - 1) * tile_x_length, y_pos + (y_loc - 1) * tile_y_length));
+					item_list.push_back(std::make_unique<Pot>((x_pos+x_loc)*tile_x_length, (y_pos+y_loc)*tile_y_length));
 				}
-				else if (tile == 2)
+				else if (tile == 1) //wall
 				{
-					//Wall w(x_pos + (x_loc - 1) * tile_x_length, y_pos + (y_loc - 1) * tile_y_length);
-					m_physical_object_list.push_back(std::make_unique<Wall>(x_pos + (x_loc - 1) * tile_x_length, y_pos + (y_loc - 1) * tile_y_length));
+					physical_object_list.push_back(std::make_unique<Wall>((x_pos+x_loc)*tile_x_length, (y_pos+y_loc)*tile_y_length));
+				}
+				else if (tile == 3) //arm
+				{
+				}
+				else if (tile == 4) //leg
+				{
+				}
+				else if (tile == 5) //keys
+				{
 				}
 
 
 				if ((x_loc + 1) % x_tile_no == 0)
 				{
 					y_loc = y_loc + 1;
-					x_loc = 1;
+					x_loc = 0;
 				}
 				else
 				{
@@ -157,7 +165,7 @@ std::pair<std::vector<std::unique_ptr<Item>>, std::vector<std::unique_ptr<Physic
 		}
 	}
 
-	return std::make_pair(std::move(m_item_list), std::move(physical_object_list));	
+	return std::make_pair(std::move(item_list), std::move(physical_object_list));	
 }
 
 void BossRegion::update(sf::Int64 elapsedTime)
