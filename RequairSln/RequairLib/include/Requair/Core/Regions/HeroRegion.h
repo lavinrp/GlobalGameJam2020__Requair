@@ -5,6 +5,7 @@
 #include <Requair/Core/Actions/MoveAction.h>
 //#include <Requair/Core/Actions/AnimationAction.h>
 #include <Requair/Core/Regions/TemplateRegion.h>
+#include <Requair/Core/Regions/BossRegion.h>
 
 #include <GameBackbone/Core/AnimatedSprite.h>
 
@@ -47,5 +48,9 @@ namespace REQ
         sf::Texture m_bossSpriteSheet;
         sf::Texture m_armSpriteSheet;
         sf::Texture m_legSpriteSheet;
+
+        REQ::BossRegion m_bossRegion;
+
+        bool m_goToNext;
     };
 }
