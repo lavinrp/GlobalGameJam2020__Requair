@@ -4,10 +4,13 @@
 #include <Requair/Core/GameObjects/Pot.h>
 #include <Requair/Core/GameObjects/Wall.h>
 #include <Requair/Core/GameObjects/Door.h>
+#include <Requair/Core/GameObjects/Floor.h>
 #include <Requair/Core/GameObjects/Key.h>
 
 #include <Requair/Utils/JsonParserUtil.h>
 #include <Requair/Utils/json.hpp>
+
+#include <SFML/Audio/Music.hpp>
 
 #include <algorithm>
 #include <fstream>
@@ -17,6 +20,13 @@ using namespace REQ;
 
 BossRegion::BossRegion(std::string jsonFile, sf::RenderWindow& window) : m_jsonFile(std::move(jsonFile)), m_window(window)
 {
+	m_music = std::make_unique<sf::Music>();
+	if (m_music->openFromFile(R"(Music/chill.wav)"))
+	{
+		m_music->play();
+		m_music->setLoop(true);
+	}
+
 	auto [item_list, physical_object_list] = ProcessJson();
 	m_item_list = std::move(item_list);
 	m_physical_object_list = std::move(physical_object_list);
@@ -140,15 +150,15 @@ std::pair<std::vector<std::unique_ptr<Item>>, std::vector<std::unique_ptr<Physic
 
 			for (auto& tile : data)
 			{
-				if (tile == 7) //pot
+				if (tile == 3) //pot
 				{
-					item_list.push_back(std::make_unique<Pot>((x_pos+x_loc)*tile_x_length, (y_pos+y_loc)*tile_y_length));
+					item_list.push_back(std::make_unique<Floor>((x_pos+x_loc)*tile_x_length, (y_pos+y_loc)*tile_y_length));
 				}
-				else if (tile == 1) //wall
+				else if (tile == 2) //wall
 				{
 					physical_object_list.push_back(std::make_unique<Wall>((x_pos+x_loc)*tile_x_length, (y_pos+y_loc)*tile_y_length));
 				}
-				else if (tile == 3) //arm
+				else if (tile == 1) //arm
 				{
 				}
 				else if (tile == 4) //leg
