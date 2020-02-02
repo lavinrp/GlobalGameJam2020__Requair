@@ -12,5 +12,6 @@ namespace REQ
 	{
 	public:
 		Item(unsigned int weight);
+		bool virtual IsCollectible();
 	};
 }

@@ -11,6 +11,7 @@ namespace REQ
 	public:
 
 		void Interact() override;
+		void IsCollectible() override;
 
 
 	};

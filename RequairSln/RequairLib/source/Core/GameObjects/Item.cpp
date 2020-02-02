@@ -3,3 +3,7 @@
 using namespace REQ;
 
 Item::Item(unsigned int weight) : PhysicalObject(weight) {}
+
+bool Item::IsCollectible() {
+	return false;
+}

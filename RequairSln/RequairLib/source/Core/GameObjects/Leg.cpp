@@ -5,3 +5,7 @@ void REQ::Leg::Interact()
 {
 
 }
+
+bool REQ::Leg::IsCollectible() {
+	return true;
+}

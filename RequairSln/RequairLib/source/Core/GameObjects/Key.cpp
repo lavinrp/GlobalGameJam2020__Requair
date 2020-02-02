@@ -5,3 +5,8 @@ void REQ::Key::Interact()
 {
 
 }
+
+
+bool REQ::Key::IsCollectible() {
+	return true;
+}
