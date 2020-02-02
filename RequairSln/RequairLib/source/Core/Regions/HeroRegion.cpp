@@ -65,10 +65,13 @@ HeroRegion::HeroRegion(const std::string& jsonFile, sf::RenderWindow& window) : 
 		animSprite.runAnimation(1, GB::ANIMATION_END_TYPE::ANIMATION_STOP);
 	};
 
+	std::unique_ptr<MoveAction> moveThenSlash = std::make_unique<MoveAction>(m_hero, sf::Vector2f{ 10 * 128, 5 * 128 }, MoveSetupFun);
+	moveThenSlash->Then(std::make_unique<AnimationAction>(m_hero, SwipeSetupFun, true));
+
 	m_action = std::make_unique<MoveAction>(m_hero, sf::Vector2f{ 7*128, 3 * 128 }, MoveSetupFun);
 	m_action->Then(std::make_unique<MoveAction>(m_hero, sf::Vector2f{ 10 * 128, 3 * 128 }, MoveSetupFun))
 		.Then(std::make_unique<ForkAction>(
-			std::make_unique<AnimationAction>(std::move(std::make_unique<MoveAction>(m_hero, sf::Vector2f{ 10 * 128, 5 * 128 }, MoveSetupFun)->Then(std::make_unique<AnimationAction>(m_hero, SwipeSetupFun, true)))),
+			std::move(moveThenSlash),
 			std::make_unique<MoveAction>(m_pot, sf::Vector2f{ 10 * 128, 1 * 128 }, MoveSetupFun)
 		));
 
