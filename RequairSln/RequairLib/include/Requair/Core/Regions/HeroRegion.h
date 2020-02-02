@@ -32,6 +32,9 @@ namespace REQ
         // Hero
         GB::AnimatedSprite m_hero;
         GB::AnimatedSprite m_boss;
+
+        GB::AnimatedSprite m_arm;
+        GB::AnimatedSprite m_leg;
         std::unique_ptr<MoveAction> m_action;
 
         // ActionSet = Start Point, End Point, Action, Other Sprite/Object that moves?
@@ -42,5 +45,7 @@ namespace REQ
         sf::RenderWindow& m_window;
         sf::Texture m_heroSpriteSheet;
         sf::Texture m_bossSpriteSheet;
+        sf::Texture m_armSpriteSheet;
+        sf::Texture m_legSpriteSheet;
     };
 }

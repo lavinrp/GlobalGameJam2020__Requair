@@ -20,13 +20,15 @@ HeroRegion::HeroRegion(const std::string& jsonFile, sf::RenderWindow& window) : 
 {
 	m_heroSpriteSheet.loadFromFile(R"(Textures/Hero Boi/HeroFull.png)");
 	m_bossSpriteSheet.loadFromFile(R"(Textures/Boss Man/BossFull.png)");
+	m_armSpriteSheet.loadFromFile(R"(Textures/Boss Man/boss man arm.png)");
+	m_legSpriteSheet.loadFromFile(R"(Textures/Boss Man/boss man legs.png)");
 
 	GB::UniformAnimationSet::Ptr heroAnimationSet = std::make_shared<GB::UniformAnimationSet>(sf::Vector2i(GridSize, GridSize));
 	// Add an animation to the UniformAnimationSet
 
 	heroAnimationSet->addAnimation({
 		{0, 0},
-	});
+		});
 
 	heroAnimationSet->addAnimation({
 		{1, 0},
@@ -59,7 +61,8 @@ HeroRegion::HeroRegion(const std::string& jsonFile, sf::RenderWindow& window) : 
 
 	bossAnimationSet->addAnimation({ // Idle Away form camera
 		{0, 1},
-			});
+		});
+
 	bossAnimationSet->addAnimation({ // Walk away from camera
 		{1, 1},
 		{2, 1},
@@ -76,7 +79,7 @@ HeroRegion::HeroRegion(const std::string& jsonFile, sf::RenderWindow& window) : 
 
 	bossAnimationSet->addAnimation({ // Idle no legs
 		{0, 2},
-			});
+		});
 
 
 	bossAnimationSet->addAnimation({ // Walk without legs 
@@ -90,20 +93,71 @@ HeroRegion::HeroRegion(const std::string& jsonFile, sf::RenderWindow& window) : 
 	m_boss.setPosition(1 * GridSize, 2 * GridSize);
 	m_boss.setAnimationDelay(sf::seconds(0.3));
 
+	GB::UniformAnimationSet::Ptr armLegAnimationSet = std::make_shared<GB::UniformAnimationSet>(sf::Vector2i(GridSize, GridSize));
+	// Add an animation to the UniformAnimationSet
+
+	armLegAnimationSet->addAnimation({
+		{0, 0},
+		});
+
+	m_arm.setTexture(m_armSpriteSheet);
+	m_leg.setTexture(m_legSpriteSheet);
+	m_arm.setAnimations(armLegAnimationSet);
+	m_leg.setAnimations(armLegAnimationSet);
+	m_arm.setPosition(m_boss.getPosition());
+	m_leg.setPosition(m_boss.getPosition());
+	m_arm.runAnimation(0, GB::ANIMATION_END_TYPE::ANIMATION_STOP);
+	m_leg.runAnimation(0, GB::ANIMATION_END_TYPE::ANIMATION_STOP);
+
 	//// Tell the region to draw the AnimatedSprite
 	addDrawable(1, &m_hero);
 	addDrawable(1, &m_boss);
 
-	//auto MoveSetupFun = [&](GB::AnimatedSprite& animSprite) -> void
-	//{
-	//	animSprite.setTexture(spriteSheet);
-	//	animSprite.runAnimation(0, GB::ANIMATION_END_TYPE::ANIMATION_LOOP);
-	//};
-	//auto SwipeSetupFun = [&](GB::AnimatedSprite& animSprite) -> void
-	//{
-	//	animSprite.setTexture(spriteSheet2);
-	//	animSprite.runAnimation(1, GB::ANIMATION_END_TYPE::ANIMATION_STOP);
-	//};
+	auto IdleSetup = [&](GB::AnimatedSprite& animSprite) -> void
+	{
+		animSprite.runAnimation(0, GB::ANIMATION_END_TYPE::ANIMATION_LOOP);
+	};
+	auto MoveSetup = [&](GB::AnimatedSprite& animSprite) -> void
+	{
+		animSprite.runAnimation(1, GB::ANIMATION_END_TYPE::ANIMATION_LOOP);
+	};
+	auto HeroSwipeSetup = [&](GB::AnimatedSprite& animSprite) -> void
+	{
+		animSprite.runAnimation(2, GB::ANIMATION_END_TYPE::ANIMATION_STOP);
+	};
+
+	auto BossBackIdleSetup = [&](GB::AnimatedSprite& animSprite) -> void
+	{
+		animSprite.runAnimation(2, GB::ANIMATION_END_TYPE::ANIMATION_LOOP);
+	};
+	auto BossBackMoveSetup = [&](GB::AnimatedSprite& animSprite) -> void
+	{
+		animSprite.runAnimation(3, GB::ANIMATION_END_TYPE::ANIMATION_LOOP);
+	};
+	auto BossArmlessIdleSetup = [&](GB::AnimatedSprite& animSprite) -> void
+	{
+		animSprite.runAnimation(4, GB::ANIMATION_END_TYPE::ANIMATION_LOOP);
+	};
+	auto BossArmlessMoveSetup = [&](GB::AnimatedSprite& animSprite) -> void
+	{
+		animSprite.runAnimation(5, GB::ANIMATION_END_TYPE::ANIMATION_LOOP);
+	};
+	auto BossLeglessIdleSetup = [&](GB::AnimatedSprite& animSprite) -> void
+	{
+		animSprite.runAnimation(6, GB::ANIMATION_END_TYPE::ANIMATION_LOOP);
+	};
+	auto BossLeglessMoveSetup = [&](GB::AnimatedSprite& animSprite) -> void
+	{
+		animSprite.runAnimation(7, GB::ANIMATION_END_TYPE::ANIMATION_LOOP);
+	};
+	auto armSetup = [&](GB::AnimatedSprite& animSprite) -> void
+	{
+		addDrawable(1, &m_arm);
+	};
+	auto legSetup = [&](GB::AnimatedSprite& animSprite) -> void
+	{
+		addDrawable(1, &m_leg);
+	};
 
 	//std::unique_ptr<MoveAction> moveThenSlash = std::make_unique<MoveAction>(m_hero, sf::Vector2f{ 10 * 128, 5 * 128 }, MoveSetupFun);
 	//moveThenSlash->Then(std::make_unique<AnimationAction>(m_hero, SwipeSetupFun, true));
