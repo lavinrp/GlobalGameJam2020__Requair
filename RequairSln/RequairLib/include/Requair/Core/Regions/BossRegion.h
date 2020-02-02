@@ -6,12 +6,14 @@
 
 #include <Requair/Core/Boss/Boss.h>
 
+#include <SFML/Graphics/RenderWindow.hpp>
+
 namespace REQ
 {
     class libRequair BossRegion : public TemplateRegion
     {
     public:
-        BossRegion(std::string jsonFile);
+        BossRegion(std::string jsonFile, sf::RenderWindow& window);
         BossRegion(const BossRegion& other) = delete;
         BossRegion operator=(const BossRegion& other) = delete;
         BossRegion(BossRegion&& other) = delete;
@@ -35,5 +37,7 @@ namespace REQ
 		REQ::Boss boss;
 		sf::Vector2f bossOrigin = sf::Vector2f(200, 200);
         float maxInteractionDistance = 100.0;
+
+        sf::RenderWindow& m_window;
     };
 }
