@@ -169,6 +169,7 @@ HeroRegion::HeroRegion(const std::string& jsonFile, sf::RenderWindow& window) : 
 
 	auto finishHeroRegion = [&, this](GB::AnimatedSprite&) -> void
 	{
+		m_music.reset();
 		m_goToNext = true;
 	};
 
