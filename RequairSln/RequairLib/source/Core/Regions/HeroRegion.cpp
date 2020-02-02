@@ -22,6 +22,14 @@ HeroRegion::HeroRegion(const std::string& jsonFile, sf::RenderWindow& window) : 
 	m_bossSpriteSheet.loadFromFile(R"(Textures/Boss Man/BossFull.png)");
 	m_armSpriteSheet.loadFromFile(R"(Textures/Boss Man/boss man arm.png)");
 	m_legSpriteSheet.loadFromFile(R"(Textures/Boss Man/boss man legs.png)");
+	m_music = std::make_unique<sf::Music>();
+	if (m_music->openFromFile(R"(Music/fight.wav)"))
+	{
+		m_music->play();
+		m_music->setLoop(true);
+	}
+
+	spriteSheet.loadFromFile(R"(Textures/boss_man_walk.png)");
 
 	GB::UniformAnimationSet::Ptr heroAnimationSet = std::make_shared<GB::UniformAnimationSet>(sf::Vector2i(GridSize, GridSize));
 	// Add an animation to the UniformAnimationSet
