@@ -4,8 +4,8 @@
 
 using namespace REQ;
 
-MoveAction::MoveAction(GB::AnimatedSprite& thingToMove, sf::Vector2f startPoint, sf::Vector2f endPoint) 
-    : AnimationAction(thingToMove), m_startPoint(startPoint), m_endPoint(endPoint) {}
+MoveAction::MoveAction(GB::AnimatedSprite& thingToMove, sf::Vector2f endPoint) 
+    : AnimationAction(thingToMove), m_endPoint(endPoint) {}
 
 bool MoveAction::Perform(sf::Int64 elapsedTime)
 {

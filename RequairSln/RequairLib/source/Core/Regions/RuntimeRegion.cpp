@@ -1,6 +1,8 @@
 #include <Requair/Core/Regions/RuntimeRegion.h>
 #include <Requair/Core/GameObjects/Pot.h>
 #include <Requair/Core/GameObjects/Item.h>
+#include <Requair/Utils/JsonParserUtil.h>
+
 #include <string>
 #include <fstream>
 #include <streambuf>
@@ -23,8 +25,7 @@ std::pair<std::vector<std::unique_ptr<Item>>, std::vector<std::unique_ptr<Physic
 	int mapHeight = levelJson["height"];
 	int mapWidth = levelJson["width"];
 	auto tiles_data = levelJson["layers"][0]["data"];
-	float tile_x_length(32.0), tile_y_length(32.0);
-	int x_loc(1), y_loc(1);
+	int x_loc(0), y_loc(0);
 
 	std::vector <std::unique_ptr<Item>> item_list;
 	std::vector <std::unique_ptr<PhysicalObject>> physical_object_list ;
@@ -32,12 +33,11 @@ std::pair<std::vector<std::unique_ptr<Item>>, std::vector<std::unique_ptr<Physic
 	{
 		if (element == 10){
 			//pot object
-			item_list.push_back(std::make_unique<Pot>((x_loc-1)*tile_x_length, (y_loc-1)*tile_y_length));
-			std::cout << "x location = " << (x_loc-1)*tile_x_length << " y location = " << (y_loc-1)*tile_y_length << " tile id = " << element << '\n';
+			item_list.push_back(ProcessItem(element, { x_loc , y_loc}));
 		
 		}
   		
-		if (x_loc%mapWidth == 0)
+		if (x_loc+1%mapWidth == 0)
 		{
 			y_loc = y_loc+1;
 			x_loc = 1;

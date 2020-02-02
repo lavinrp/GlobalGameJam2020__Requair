@@ -21,6 +21,7 @@ add_library(Requair SHARED
   "include/Requair/Core/Regions/TemplateRegion.h"
   "include/Requair/Utils/DllUtils.h"
   "include/Requair/Utils/json.hpp"
+  "include/Requair/Utils/JsonParserUtil.h"
   
   
   "source/Core/Actions/Action.cpp"
@@ -39,6 +40,8 @@ add_library(Requair SHARED
   "source/Core/Regions/RuntimeRegion.cpp"
   "source/Core/Regions/TemplateRegion.cpp"
   "source/Requair.cpp"
+  "source/Utils/JsonParserUtil.cpp"
+
 )
 set_target_properties(Requair PROPERTIES DEBUG_POSTFIX ${CMAKE_DEBUG_POSTFIX})
 

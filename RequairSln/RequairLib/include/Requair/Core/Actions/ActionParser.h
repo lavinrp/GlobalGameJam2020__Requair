@@ -7,7 +7,6 @@
 
 #include <string>
 #include <memory>
-#include <vector>
 
 namespace REQ
 {
@@ -18,7 +17,6 @@ namespace REQ
         ActionParser() = delete;
 
     private:
-        std::vector<std::unique_ptr<Action>> ProcessJson(const std::string& jsonFile);
-        std::unique_ptr<Action> ProcessAction(nlohmann::json action);
+        std::unique_ptr<Action> ProcessJson(const std::string& jsonFile);
     };
 }

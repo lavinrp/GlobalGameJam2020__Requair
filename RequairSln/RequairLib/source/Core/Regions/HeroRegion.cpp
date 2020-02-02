@@ -41,10 +41,10 @@ HeroRegion::HeroRegion(const std::string& jsonFile) : RuntimeRegion(jsonFile)
 	addDrawable(1, &m_hero);
 	
 
-	m_action = std::make_unique<MoveAction>(m_hero, sf::Vector2f{ 150.0f,50.0f }, sf::Vector2f{ 150.0f, 550.0f });
+	m_action = std::make_unique<MoveAction>(m_hero, sf::Vector2f{ 150.0f, 550.0f });
 
 	/*MoveAction banana{ m_hero, sf::Vector2f{ 0.0f, 0.0f }, sf::Vector2f{ 10.0f, 10.0f } };
-	banana.Then(MoveAction{ GB::AnimatedSprite{}, sf::Vector2f{ 0.0f, 0.0f }, sf::Vector2f{ 10.0f, 10.0f } })
+	banana.Then(MoveAction{ GB::AnimatedSprite{}, sf::Vector2f{ 10.0f, 10.0f } })
 		.Then(AnimationAction{ GB::AnimatedSprite{} });*/
 
 }
