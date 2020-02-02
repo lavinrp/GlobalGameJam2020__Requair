@@ -16,7 +16,7 @@ namespace REQ
 
 	private:
 		bool m_broken;
-		static inline sf::Texture m_texture = [] () {
+		sf::Texture m_texture = [] () {
 			sf::Texture tex{};
 			tex.loadFromFile("Textures/Pot.png");
 			return tex;

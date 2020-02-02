@@ -53,7 +53,7 @@ std::unique_ptr<REQ::Action> REQ::ProcessAction(nlohmann::json actionJson)
         nlohmann::json otherNextActionJson = actionJson["otherNextAction"];
         std::unique_ptr<REQ::Action> otherNextAction = REQ::ProcessAction(actionJson);
 
-        return std::make_unique<ForkAction>(nextAction, otherNextAction);
+        return {}; // TODO: FIX ME std::make_unique<ForkAction>(nextAction, otherNextAction);
     }
     else
     {
@@ -68,7 +68,7 @@ std::unique_ptr<REQ::Action> REQ::ProcessAction(nlohmann::json actionJson)
         if (actionType == "AnimationAction")
         {
             std::unique_ptr<REQ::Item> item = REQ::ProcessItem(itemJson);
-            returnAction = std::make_unique<AnimationAction>(*(item.get()));
+            returnAction = {}; // TODO: FIX ME std::make_unique<AnimationAction>(*(item.get()));
 
             /*if (nextAction)
             {
@@ -81,7 +81,7 @@ std::unique_ptr<REQ::Action> REQ::ProcessAction(nlohmann::json actionJson)
 
             nlohmann::json itemToCreate = actionJson["Destination"];
             sf::Vector2f location = { itemToCreate["x"], itemToCreate["y"] };
-            returnAction = std::make_unique<MoveAction>(*(item.get()), location);
+            returnAction = {}; // TODO: FIX ME std::make_unique<MoveAction>(*(item.get()), location);
 
             /*if (nextAction)
             {

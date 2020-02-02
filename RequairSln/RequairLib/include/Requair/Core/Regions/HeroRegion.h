@@ -4,7 +4,7 @@
 
 #include <Requair/Core/Actions/MoveAction.h>
 //#include <Requair/Core/Actions/AnimationAction.h>
-#include <Requair/Core/Regions/RuntimeRegion.h>
+#include <Requair/Core/Regions/TemplateRegion.h>
 
 #include <GameBackbone/Core/AnimatedSprite.h>
 
@@ -18,7 +18,7 @@
 
 namespace REQ
 {
-    class libRequair HeroRegion : public RuntimeRegion
+    class libRequair HeroRegion : public TemplateRegion
     {
     public:
         HeroRegion(const std::string& jsonFile);

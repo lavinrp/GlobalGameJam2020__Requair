@@ -12,9 +12,9 @@ const int GridSize = 128;
 
 using namespace REQ;
 
-HeroRegion::HeroRegion(const std::string& jsonFile) : RuntimeRegion(jsonFile)
+HeroRegion::HeroRegion(const std::string& jsonFile) : TemplateRegion()
 {
-	spriteSheet.loadFromFile(R"(Textures/boss_man_walk.png)");;
+	spriteSheet.loadFromFile(R"(Textures/boss_man_walk.png)");
 
 	GB::UniformAnimationSet::Ptr uniformAnimationSet = std::make_shared<GB::UniformAnimationSet>(sf::Vector2i(GridSize, GridSize));
 	// Add an animation to the UniformAnimationSet
