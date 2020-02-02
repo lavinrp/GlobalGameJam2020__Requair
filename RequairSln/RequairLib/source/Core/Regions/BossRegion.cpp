@@ -3,12 +3,15 @@
 #include <Requair/Core/GameObjects/Leg.h>
 #include <Requair/Core/GameObjects/Pot.h>
 #include <Requair/Core/GameObjects/Wall.h>
+#include <Requair/Core/GameObjects/Door.h>
 #include <Requair/Core/GameObjects/Floor.h>
 #include <Requair/Core/GameObjects/Key.h>
 #include <Requair/Core/GameObjects/PhysicalObject.h>
 
 #include <Requair/Utils/JsonParserUtil.h>
 #include <Requair/Utils/json.hpp>
+
+#include <SFML/Audio/Music.hpp>
 
 #include <algorithm>
 #include <fstream>
@@ -18,6 +21,13 @@ using namespace REQ;
 
 BossRegion::BossRegion(std::string jsonFile, sf::RenderWindow& window) : m_jsonFile(std::move(jsonFile)), m_window(window)
 {
+	// m_music = std::make_unique<sf::Music>();
+	/*if (m_music->openFromFile(R"(Music/chill.wav)"))
+	{
+		m_music->play();
+		m_music->setLoop(true);
+	}*/
+
 	auto [item_list, physical_object_list] = ProcessJson();
 	boss.setPosition(bossOrigin);
 	m_item_list = std::move(item_list);
@@ -42,7 +52,12 @@ BossRegion::BossRegion(std::string jsonFile, sf::RenderWindow& window) : m_jsonF
 		}
 	}
 
+	ShouldBeParsedFromJsonButIsntYet();
 
+	addDrawable(5, &boss);
+}
+
+void BossRegion::ShouldBeParsedFromJsonButIsntYet() {
 
 	//auto pot = std::make_unique<Pot>(400, 300);
 	//addDrawable(4, pot.get());
@@ -60,8 +75,10 @@ BossRegion::BossRegion(std::string jsonFile, sf::RenderWindow& window) : m_jsonF
 	//addDrawable(3, key.get());
 	//m_item_list.push_back(std::move(key));
 
+	auto door = std::make_unique<Door>(300, 100);
+	addDrawable(3, door.get());
+	m_item_list.push_back(std::move(door));
 
-	addDrawable(5, &boss);
 }
 
 void BossRegion::HandleEvent(sf::Event& event)
@@ -88,7 +105,7 @@ void BossRegion::HandleEvent(sf::Event& event)
 				auto distance = sqrt(pow(bossPosition.x - nearestItemPosition.x, 2) + pow(bossPosition.y - nearestItemPosition.y, 2));
 				if (distance <= maxInteractionDistance)
 				{
-					nearestItem->get()->Interact();
+					nearestItem->get()->Interact(boss);
 					std::cout << "Interacted with item at (" << nearestItem->get()->GetObjectPosition().x << ", " << nearestItem->get()->GetObjectPosition().y << ")" << std::endl;
 				}
 			}
@@ -173,7 +190,16 @@ std::pair<std::vector<std::unique_ptr<Item>>, std::vector<std::unique_ptr<Physic
 
 void BossRegion::update(sf::Int64 elapsedTime)
 {
-	//elapsedTime = 1;
+	if (!m_music)
+	{
+		m_music = std::make_unique<sf::Music>();
+		if (m_music->openFromFile(R"(Music/chill.wav)"))
+		{
+			m_music->play();
+			m_music->setLoop(true);
+		}
+	}
+
 	TemplateRegion::update(elapsedTime);
 	for (int i=0; i<m_physical_object_list.size(); i++)
 	{

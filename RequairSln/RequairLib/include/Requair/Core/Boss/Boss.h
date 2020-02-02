@@ -6,7 +6,6 @@
 #include <SFML/Window/Event.hpp>
 #include <Requair/Core/GameObjects/PhysicalObject.h>
 
-
 #include <GameBackbone/Core/AnimatedSprite.h>
 #include <GameBackbone/Core/AnimationSet.h>
 #include <GameBackbone/Core/GameRegion.h>
@@ -21,14 +20,18 @@ namespace REQ
 	{
 	public:
 		Boss();
+		void GainLegs();
+		void LoseLegs();
+		void GainArm();
+		void LoseArm();
 		void update(sf::Int64 elapsedTime) override;
 		void Translate(sf::Vector2f offset) override;
 		sf::FloatRect GetObjectBounds() const override;
 		sf::Vector2f GetObjectPosition() const override;
 
 	private:
-		float bossSpeed = .0003;
-		
-		sf::Texture spriteSheet;
+		float bossSpeed = .00015f;
+		sf::Texture m_fullBodyTexture;
+		sf::Texture m_noLegsTexture;
 	};
 }
