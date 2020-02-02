@@ -5,9 +5,6 @@
 
 #include <SFML/Graphics/Texture.hpp>
 
-#include <Requair/Core/Boss/Boss.h>
-
-
 namespace REQ
 {
 	class libRequair Floor : public SpriteItem
@@ -15,7 +12,7 @@ namespace REQ
 	public:
 		Floor(float x, float y);
 
-		void Interact(Boss& boss) override;
+		void Interact() override;
 
 	private:
 		sf::Texture m_texture = [] () {

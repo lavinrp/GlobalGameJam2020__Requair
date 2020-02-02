@@ -11,7 +11,7 @@ Floor::Floor(float x, float y) : SpriteItem(1000)
 	this->setTexture(m_texture, true);
 }
 
-void Floor::Interact(Boss& boss)
+void Floor::Interact()
 {
 	
 }

@@ -7,15 +7,19 @@ ForkAction::ForkAction(std::unique_ptr<Action> nextAction, std::unique_ptr<Actio
 
 bool ForkAction::Perform(sf::Int64 elapsedTime)
 {
-    return true;
+    if (m_isFinished)
+    {
+        return true;
+    }
+    return false;
 }
 
 void ForkAction::update(sf::Int64 elapsedTime)
 {
     if (Perform(elapsedTime))
     {
-        m_firstNextAction->update(elapsedTime);
-        m_otherNextAction->update(elapsedTime);
+        m_firstNextAction->Perform(elapsedTime);
+        m_otherNextAction->Perform(elapsedTime);
     }
 }
 

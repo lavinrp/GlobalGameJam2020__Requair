@@ -13,7 +13,7 @@ namespace REQ
 	public:
 		Wall(float x, float y);
 
-		void Interact(REQ::Boss& boss) override;
+		void Interact() override;
 
 	private:
 		sf::Texture m_texture = [] () {

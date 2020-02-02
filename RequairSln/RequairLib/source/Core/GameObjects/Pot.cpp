@@ -13,7 +13,7 @@ Pot::Pot(float x, float y) : AnimatedItem(100),
 	this->setAnimating(false);
 }
 
-void Pot::Interact(REQ::Boss& boss)
+void Pot::Interact()
 {
 	m_broken = !m_broken;
 	if (m_broken)

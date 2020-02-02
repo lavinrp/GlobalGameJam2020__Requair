@@ -18,11 +18,10 @@ using namespace REQ;
 
 Boss::Boss():PhysicalObject(5) {
 
-	m_fullBodyTexture.loadFromFile(R"(Textures/boss_man_walk.png)");
-	m_noLegsTexture.loadFromFile(R"(Textures/boss_man_sans_A_L_walk.png)");
+	spriteSheet.loadFromFile(R"(Textures/boss_man_walk.png)");
 
-	int frameDimX = m_fullBodyTexture.getSize().x / 3;
-	int frameDimY = m_fullBodyTexture.getSize().y;
+	int frameDimX = spriteSheet.getSize().x / 3;
+	int frameDimY = spriteSheet.getSize().y;
 
 	GB::UniformAnimationSet::Ptr uniformAnimationSet = std::make_shared<GB::UniformAnimationSet>(sf::Vector2i(frameDimX, frameDimY));
 	uniformAnimationSet->addAnimation({
@@ -33,7 +32,7 @@ Boss::Boss():PhysicalObject(5) {
 		{2, 0},
 		});
 	
-	setTexture(m_noLegsTexture);
+	setTexture(spriteSheet);
 	setAnimations(uniformAnimationSet);
 
 	setAnimationDelay(sf::seconds(0.3));
@@ -104,7 +103,6 @@ void Boss::update(sf::Int64 elapsedTime) {
 	}
 
 }
-
 void Boss::Translate(sf::Vector2f offset)
 {
 	move(offset);
@@ -118,28 +116,4 @@ sf::FloatRect Boss::GetObjectBounds() const
 sf::Vector2f Boss::GetObjectPosition() const
 {
 	return getPosition();
-}
-
-void REQ::Boss::GainLegs()
-{
-	setTexture(m_fullBodyTexture);
-	bossSpeed *= 2.0f;
-}
-
-void REQ::Boss::LoseLegs()
-{
-	setTexture(m_noLegsTexture);
-	bossSpeed *= 0.5f;
-}
-
-void REQ::Boss::GainArm()
-{
-	setTexture(m_fullBodyTexture);
-	//bossSpeed *= 2.0f;
-}
-
-void REQ::Boss::LoseArm()
-{
-	setTexture(m_noLegsTexture);
-	//bossSpeed *= 0.5f;
 }

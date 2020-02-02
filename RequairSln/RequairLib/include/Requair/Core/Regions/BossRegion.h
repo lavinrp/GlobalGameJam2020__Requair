@@ -21,7 +21,6 @@ namespace REQ
 
 		void HandleEvent(sf::Event& event) override;
 		void update(sf::Int64 elapsedTime) override;
-		void ShouldBeParsedFromJsonButIsntYet();
 
 
     private:

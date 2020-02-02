@@ -11,7 +11,7 @@ Wall::Wall(float x, float y) : SpriteItem(1000)
 	this->setTexture(m_texture, true);
 }
 
-void Wall::Interact(REQ::Boss& boss)
+void Wall::Interact()
 {
 	
 }

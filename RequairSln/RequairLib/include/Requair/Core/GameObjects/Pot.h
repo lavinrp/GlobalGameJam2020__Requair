@@ -15,7 +15,7 @@ namespace REQ
 	public:
 		Pot(float x, float y);
 
-		void Interact(REQ::Boss& boss) override;
+		void Interact() override;
 
 	private:
 		bool m_broken;

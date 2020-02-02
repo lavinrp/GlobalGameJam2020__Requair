@@ -12,7 +12,8 @@ namespace REQ
     public:
         ForkAction(std::unique_ptr<Action> nextAction, std::unique_ptr<Action> otherNextAction);
 
-        bool Perform(sf::Int64 elapsedTime) override;
+        virtual bool Perform(sf::Int64 elapsedTime);
+
         void update(sf::Int64 elapsedTime) override;
 
     protected:

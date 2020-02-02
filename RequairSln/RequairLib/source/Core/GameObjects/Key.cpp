@@ -7,7 +7,7 @@ REQ::Key::Key(float x, float y) : SpriteItem(0)
 }
 
 
-void REQ::Key::Interact(REQ::Boss& boss)
+void REQ::Key::Interact()
 {
 
 }

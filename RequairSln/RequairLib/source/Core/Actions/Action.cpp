@@ -27,7 +27,7 @@ void Action::update(sf::Int64 elapsedTime)
     {
         if (m_nextAction != nullptr)
         {
-            m_nextAction->update(elapsedTime);
+            m_nextAction->Perform(elapsedTime);
         }
     }
 }

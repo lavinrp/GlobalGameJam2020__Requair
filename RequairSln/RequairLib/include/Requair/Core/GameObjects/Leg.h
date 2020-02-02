@@ -14,7 +14,7 @@ namespace REQ
 
 		Leg(float x, float y);
 
-		void Interact(REQ::Boss& boss) override;
+		void Interact() override;
 
 		bool IsCollectible() override;
 
@@ -25,7 +25,6 @@ namespace REQ
 			return tex;
 		}();
 
-		bool hasBeenGrabbed;
 	};
 
 }
