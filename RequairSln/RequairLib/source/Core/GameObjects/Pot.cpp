@@ -18,10 +18,10 @@ void Pot::Interact()
 	m_broken = !m_broken;
 	if (m_broken)
 	{
-		setCurrentAnimation(1);
+		setCurrentFrame(1);
 	}
 	else
 	{
-		setCurrentAnimation(0);
+		setCurrentFrame(0);
 	}
 }
