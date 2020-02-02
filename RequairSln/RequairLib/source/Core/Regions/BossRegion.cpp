@@ -3,6 +3,7 @@
 #include <Requair/Core/GameObjects/Leg.h>
 #include <Requair/Core/GameObjects/Pot.h>
 #include <Requair/Core/GameObjects/Wall.h>
+#include <Requair/Core/GameObjects/Floor.h>
 #include <Requair/Core/GameObjects/Key.h>
 
 #include <Requair/Utils/JsonParserUtil.h>
@@ -132,15 +133,15 @@ std::pair<std::vector<std::unique_ptr<Item>>, std::vector<std::unique_ptr<Physic
 
 			for (auto& tile : data)
 			{
-				if (tile == 7) //pot
+				if (tile == 3) //pot
 				{
-					item_list.push_back(std::make_unique<Pot>((x_pos+x_loc)*tile_x_length, (y_pos+y_loc)*tile_y_length));
+					item_list.push_back(std::make_unique<Floor>((x_pos+x_loc)*tile_x_length, (y_pos+y_loc)*tile_y_length));
 				}
-				else if (tile == 1) //wall
+				else if (tile == 2) //wall
 				{
 					physical_object_list.push_back(std::make_unique<Wall>((x_pos+x_loc)*tile_x_length, (y_pos+y_loc)*tile_y_length));
 				}
-				else if (tile == 3) //arm
+				else if (tile == 1) //arm
 				{
 				}
 				else if (tile == 4) //leg
