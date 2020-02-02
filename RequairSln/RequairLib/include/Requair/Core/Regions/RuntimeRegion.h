@@ -16,10 +16,14 @@ namespace REQ
     {
     public:
         RuntimeRegion(const std::string& jsonFile);
+        RuntimeRegion(const RuntimeRegion&) = delete;
+        RuntimeRegion(RuntimeRegion&&) = delete;
+        RuntimeRegion& operator=(const RuntimeRegion&) = delete;
+        RuntimeRegion& operator=(RuntimeRegion&&) = delete;
         RuntimeRegion() = delete;
     protected:
-        std::unique_ptr<Item> item_list;
-        std::unique_ptr<PhysicalObject> physical_object_list; 
+        std::vector<std::unique_ptr<Item>> item_list;
+        std::vector<std::unique_ptr<PhysicalObject>> physical_object_list; 
         
     private:
         std::pair<std::vector<std::unique_ptr<Item>>, std::vector<std::unique_ptr<PhysicalObject>> > ProcessJson();
