@@ -13,7 +13,7 @@ namespace REQ
 	public:
 		Arm(float x, float y);
 
-		void Interact() override;
+		void Interact(REQ::Boss& boss) override;
 		bool IsCollectible() override;
 	private:
 		sf::Texture m_texture = []() {
@@ -22,6 +22,7 @@ namespace REQ
 			return tex;
 		}();
 
+		bool hasBeenGrabbed;
 	};
 
 }
