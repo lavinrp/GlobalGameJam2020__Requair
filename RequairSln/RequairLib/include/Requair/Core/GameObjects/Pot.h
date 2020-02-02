@@ -18,7 +18,7 @@ namespace REQ
 		bool m_broken;
 		sf::Texture m_texture = [] () {
 			sf::Texture tex{};
-			tex.loadFromFile("Textures/Pot.png");
+			tex.loadFromFile("Textures/3_Stages_of_Pot.png");
 			return tex;
 		}();
 		static inline GB::AnimationSet::Ptr m_animations = []() -> GB::AnimationSet::Ptr {

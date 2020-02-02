@@ -18,5 +18,12 @@ EventController::EventController() : CoreEventController(APP_NAME), mainRegion(s
 
 void EventController::handleEvent(sf::Event & event)
 {
-	static_cast<TemplateRegion*>(getActiveRegion())->HandleEvent(event);
+	if (event.type == sf::Event::Closed)
+	{
+		getWindow().close();
+	}
+	else
+	{
+		static_cast<TemplateRegion*>(getActiveRegion())->HandleEvent(event);
+	}
 }
