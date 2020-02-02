@@ -13,7 +13,7 @@ namespace REQ
 	public:
 		Key(float x, float y);
 
-		void Interact() override;
+		void Interact(REQ::Boss& boss) override;
 
 		bool IsCollectible() override;
 

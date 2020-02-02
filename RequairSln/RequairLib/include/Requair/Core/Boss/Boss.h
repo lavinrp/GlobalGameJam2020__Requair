@@ -21,9 +21,12 @@ namespace REQ
 	{
 	public:
 		Boss();
+		void GainLegs();
+		void LoseLegs();
 		void update(sf::Int64 elapsedTime) override;
 	private:
-		float bossSpeed = .0003;
-		sf::Texture spriteSheet;
+		float bossSpeed = .00015f;
+		sf::Texture m_fullBodyTexture;
+		sf::Texture m_noLegsTexture;
 	};
 }

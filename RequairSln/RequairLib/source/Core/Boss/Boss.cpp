@@ -18,10 +18,11 @@ using namespace REQ;
 
 Boss::Boss() {
 
-	spriteSheet.loadFromFile(R"(Textures/boss_man_walk.png)");
+	m_fullBodyTexture.loadFromFile(R"(Textures/boss_man_walk.png)");
+	m_noLegsTexture.loadFromFile(R"(Textures/boss_man_sans_A_L_walk.png)");
 
-	int frameDimX = spriteSheet.getSize().x / 3;
-	int frameDimY = spriteSheet.getSize().y;
+	int frameDimX = m_fullBodyTexture.getSize().x / 3;
+	int frameDimY = m_fullBodyTexture.getSize().y;
 
 	GB::UniformAnimationSet::Ptr uniformAnimationSet = std::make_shared<GB::UniformAnimationSet>(sf::Vector2i(frameDimX, frameDimY));
 	uniformAnimationSet->addAnimation({
@@ -32,7 +33,7 @@ Boss::Boss() {
 		{2, 0},
 		});
 	
-	setTexture(spriteSheet);
+	setTexture(m_noLegsTexture);
 	setAnimations(uniformAnimationSet);
 
 	setAnimationDelay(sf::seconds(0.3));
@@ -95,5 +96,18 @@ void Boss::update(sf::Int64 elapsedTime) {
 			this->setAnimating(false);
 		}
 	}
+
+}
+
+void REQ::Boss::GainLegs()
+{
+	setTexture(m_fullBodyTexture);
+	bossSpeed *= 2.0f;
+}
+
+void REQ::Boss::LoseLegs()
+{
+	setTexture(m_noLegsTexture);
+	bossSpeed *= 0.5f;
 
 }

@@ -7,7 +7,7 @@ REQ::Arm::Arm(float x, float y) : SpriteItem(0)
 	this->setTexture(m_texture, true);
 }
 
-void REQ::Arm::Interact()
+void REQ::Arm::Interact(REQ::Boss& boss)
 {
 
 }

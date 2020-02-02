@@ -6,9 +6,9 @@ REQ::Leg::Leg(float x, float y) : SpriteItem(0)
 	this->setTexture(m_texture, true);
 }
 
-void REQ::Leg::Interact()
+void REQ::Leg::Interact(REQ::Boss& boss)
 {
-
+	boss.GainLegs();
 }
 
 bool REQ::Leg::IsCollectible() {

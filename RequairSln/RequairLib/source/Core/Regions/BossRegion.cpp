@@ -64,7 +64,7 @@ void BossRegion::HandleEvent(sf::Event& event)
 				auto distance = sqrt(pow(bossPosition.x - nearestItemPosition.x, 2) + pow(bossPosition.y - nearestItemPosition.y, 2));
 				if (distance <= maxInteractionDistance)
 				{
-					nearestItem->get()->Interact();
+					nearestItem->get()->Interact(boss);
 					std::cout << "Interacted with item at (" << nearestItem->get()->GetObjectPosition().x << ", " << nearestItem->get()->GetObjectPosition().y << ")" << std::endl;
 				}
 			}
