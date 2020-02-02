@@ -6,9 +6,6 @@ using namespace REQ;
 BossRegion::BossRegion(std::string jsonFile) : RuntimeRegion(jsonFile)
 {
 
-	bossPos.x = bossOrigin.x;
-	bossPos.y = bossOrigin.y;
-
 	addDrawable(5, &boss);
 }
 

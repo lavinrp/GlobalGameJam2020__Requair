@@ -22,9 +22,10 @@ namespace REQ
 	public:
 		Boss();
 		void MovementControls(sf::Event& event);
+		void update(sf::Int64 elapsedTime) override;
 	private:
 
-		sf::Vector2f bossPos = sf::Vector2f(200, 200);
+		sf::Vector2f bossPos;
 		sf::Vector2f bossSpeed = sf::Vector2f(5, 5);
 
 		sf::Texture spriteSheet;
