@@ -12,7 +12,7 @@
 #include <SFML/Graphics/Sprite.hpp>
 
 #include <memory>
-
+#include <cmath>
 
 using namespace REQ;
 

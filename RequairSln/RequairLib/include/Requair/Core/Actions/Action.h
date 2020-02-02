@@ -6,13 +6,12 @@
 
 #include <memory>
 
-
 namespace REQ
 {
     class libRequair Action : public GB::Updatable
     {
     public:
-        Action::Action();
+        Action();
 
         virtual bool Perform(sf::Int64 elapsedTime);
         virtual Action& Then(std::unique_ptr<Action> nextAction);
