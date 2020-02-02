@@ -18,31 +18,75 @@ using namespace REQ;
 
 HeroRegion::HeroRegion(const std::string& jsonFile, sf::RenderWindow& window) : TemplateRegion(), m_window(window)
 {
-	spriteSheet.loadFromFile(R"(Textures/Hero Boi/hero boi walk.png)");
-	spriteSheet2.loadFromFile(R"(Textures/Hero Boi/hero boi attack.png)");
-	m_bossSpriteSheet.loadFromFile(R"(Textures/boss_man_walk.png)");
+	m_heroSpriteSheet.loadFromFile(R"(Textures/Hero Boi/HeroFull.png)");
+	m_bossSpriteSheet.loadFromFile(R"(Textures/Boss Man/BossFull.png)");
 
-	GB::UniformAnimationSet::Ptr uniformAnimationSet = std::make_shared<GB::UniformAnimationSet>(sf::Vector2i(GridSize, GridSize));
+	GB::UniformAnimationSet::Ptr heroAnimationSet = std::make_shared<GB::UniformAnimationSet>(sf::Vector2i(GridSize, GridSize));
 	// Add an animation to the UniformAnimationSet
-	uniformAnimationSet->addAnimation({
-		//{0, 0},		// Top left of the texture
-		{1, 0},		// Top middle of the texture
-		{2, 0},		// Top right of the texture
+
+	heroAnimationSet->addAnimation({
+		{0, 0},
+	});
+
+	heroAnimationSet->addAnimation({
+		{1, 0},
+		{2, 0},
 		});
 
-	uniformAnimationSet->addAnimation({
-		{0, 0},		// Top left of the texture
-		{1, 0},		// Top middle of the texture
+	heroAnimationSet->addAnimation({
+		{0, 1},		// Top left of the texture
+		{1, 1},		// Top middle of the texture
 		});
 
 	// Create an AnimatedSprite to display the UniformAnimation
-	m_hero.setTexture(spriteSheet);
-	m_hero.setAnimations(uniformAnimationSet);
+	m_hero.setTexture(m_heroSpriteSheet);
+	m_hero.setAnimations(heroAnimationSet);
 	m_hero.setPosition(10 * GridSize, 3 * GridSize);
 	m_hero.setAnimationDelay(sf::seconds(0.3));
 
+
+	GB::UniformAnimationSet::Ptr bossAnimationSet = std::make_shared<GB::UniformAnimationSet>(sf::Vector2i(GridSize, GridSize));
+	// Add an animation to the UniformAnimationSet
+
+	bossAnimationSet->addAnimation({ // Idle
+		{0, 0},
+		});
+
+	bossAnimationSet->addAnimation({ // Walk towards camera
+		{1, 0},
+		{2, 0},
+		});
+
+	bossAnimationSet->addAnimation({ // Idle Away form camera
+		{0, 1},
+			});
+	bossAnimationSet->addAnimation({ // Walk away from camera
+		{1, 1},
+		{2, 1},
+		});
+
+	bossAnimationSet->addAnimation({ // Idle no arm
+		{0, 2},
+		});
+
+	bossAnimationSet->addAnimation({ // Walk without arm 
+		{1, 2},
+		{2, 2},
+		});
+
+	bossAnimationSet->addAnimation({ // Idle no legs
+		{0, 2},
+			});
+
+
+	bossAnimationSet->addAnimation({ // Walk without legs 
+		{1, 3},
+		{2, 3},
+		});
+
+
 	m_boss.setTexture(m_bossSpriteSheet);
-	m_boss.setAnimations(uniformAnimationSet);
+	m_boss.setAnimations(bossAnimationSet);
 	m_boss.setPosition(1 * GridSize, 2 * GridSize);
 	m_boss.setAnimationDelay(sf::seconds(0.3));
 
@@ -50,8 +94,6 @@ HeroRegion::HeroRegion(const std::string& jsonFile, sf::RenderWindow& window) : 
 	addDrawable(1, &m_hero);
 	addDrawable(1, &m_boss);
 
-	//addDrawable(1, &m_pot);
-	//
 	//auto MoveSetupFun = [&](GB::AnimatedSprite& animSprite) -> void
 	//{
 	//	animSprite.setTexture(spriteSheet);

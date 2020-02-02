@@ -40,8 +40,7 @@ namespace REQ
 
 
         sf::RenderWindow& m_window;
-        sf::Texture spriteSheet;
-        sf::Texture spriteSheet2;
+        sf::Texture m_heroSpriteSheet;
         sf::Texture m_bossSpriteSheet;
     };
 }
