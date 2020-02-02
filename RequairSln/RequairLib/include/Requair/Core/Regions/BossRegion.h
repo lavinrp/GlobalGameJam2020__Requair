@@ -4,6 +4,7 @@
 
 #include <Requair/Core/Regions/TemplateRegion.h>
 
+#include <Requair/Core/Boss/Boss.h>
 
 namespace REQ
 {
@@ -12,6 +13,8 @@ namespace REQ
     public:
         BossRegion(std::string jsonFile);
         BossRegion() = delete;
+		void HandleEvent(sf::Event& event) override;
+		void update(sf::Int64 elapsedTime) override;
 
 
     private:
@@ -25,6 +28,7 @@ namespace REQ
         std::string m_jsonFile;
 
         // Player (boss)
-
+		REQ::Boss boss;
+		sf::Vector2f bossOrigin = sf::Vector2f(200, 200);
     };
 }

@@ -23,6 +23,7 @@ namespace REQ
     public:
         HeroRegion(const std::string& jsonFile);
         HeroRegion() = delete;
+		void HandleEvent(sf::Event& even) override;
 
         void update(sf::Int64 elapsedTime) override;
 

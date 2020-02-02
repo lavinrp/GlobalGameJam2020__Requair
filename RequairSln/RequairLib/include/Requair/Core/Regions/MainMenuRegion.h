@@ -2,6 +2,8 @@
 
 #include <Requair/Utils/DllUtils.h>
 
+#include <SFML/Window/Event.hpp>
+
 #include <Requair/Core/Regions/TemplateRegion.h>
 
 
@@ -11,6 +13,7 @@ namespace REQ
     {
     public:
         MainMenuRegion();
+		void HandleEvent(sf::Event& even) override;
 
     private:
 

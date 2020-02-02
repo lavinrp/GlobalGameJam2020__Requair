@@ -36,7 +36,6 @@ HeroRegion::HeroRegion(const std::string& jsonFile) : TemplateRegion()
 	// The animation will reverse directions every time it reaches the beginning or end
 	m_hero.runAnimation(0, GB::ANIMATION_END_TYPE::ANIMATION_LOOP);
 
-
 	// Tell the region to draw the AnimatedSprite
 	addDrawable(1, &m_hero);
 	
@@ -55,4 +54,8 @@ void HeroRegion::update(sf::Int64 elapsedTime)
 	m_action->update(elapsedTime);
 	//std::cout << m_hero.getPosition().x << " " << m_hero.getPosition().y << "\n";
 	std::cout << getDrawableCount()<< "\n";
+}
+
+void HeroRegion::HandleEvent(sf::Event& event) {
+
 }

@@ -1,9 +1,10 @@
 #include <Requair/Core/Regions/BossRegion.h>
+
 #include <Requair/Utils/JsonParserUtil.h>
 #include <Requair/Utils/json.hpp>
+
 #include <fstream>
 #include <streambuf>
-
 
 using namespace REQ;
 
@@ -11,6 +12,8 @@ BossRegion::BossRegion(std::string jsonFile) : m_jsonFile(std::move(jsonFile))
 {
 	m_jsonFile = jsonFile;
 	auto [item_list, phycial_object_list] = ProcessJson();
+
+	addDrawable(5, &boss);
 }
 
 std::pair<std::vector<std::unique_ptr<Item>>, std::vector<std::unique_ptr<PhysicalObject>>> BossRegion::ProcessJson()
@@ -59,5 +62,17 @@ std::pair<std::vector<std::unique_ptr<Item>>, std::vector<std::unique_ptr<Physic
 		}
 	}
 
-	return std::make_pair(std::move(item_list), std::move(physical_object_list));
+	return std::make_pair(std::move(item_list), std::move(physical_object_list));	
+}
+
+void BossRegion::HandleEvent(sf::Event& event) {
+
+
+	boss.MovementControls(event);
+}
+
+void BossRegion::update(sf::Int64 elapsedTime)
+{
+	TemplateRegion::update(elapsedTime);
+	boss.update(elapsedTime);
 }
