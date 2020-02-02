@@ -1,5 +1,6 @@
 #include <Requair/Core/GameObjects/Pot.h>
-#include <GameBackbone/Core/AnimatedSprite.h>
+
+#include <Requair/Core/GameObjects/AnimatedItem.h>
 
 using namespace REQ;
 

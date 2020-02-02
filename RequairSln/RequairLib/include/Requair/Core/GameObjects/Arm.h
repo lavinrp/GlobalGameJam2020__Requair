@@ -6,7 +6,7 @@
 
 namespace REQ
 {
-	class libRequair Key : public SpriteItem
+	class libRequair Arm : public SpriteItem
 	{
 	public:
 

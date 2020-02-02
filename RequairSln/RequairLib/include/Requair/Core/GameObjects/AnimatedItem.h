@@ -14,12 +14,10 @@ namespace REQ
 		AnimatedItem(unsigned int weight);
 
 		void Translate(sf::Vector2f offset) override;
-
 		sf::FloatRect GetObjectBounds() const override;
-
 		sf::Vector2f GetObjectPosition() const override;
-
 		void update(sf::Int64 elapsedTime) override;
+
 	private:
 	};
 }

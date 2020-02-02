@@ -1,6 +1,9 @@
 #include <Requair/Core/EventController.h>
 
+#include <Requair/Core/Regions/TemplateRegion.h>
+
 #include <string>
+#include <memory>
 
 using namespace REQ;
 

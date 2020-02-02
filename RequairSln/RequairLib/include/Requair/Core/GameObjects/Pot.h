@@ -18,13 +18,13 @@ namespace REQ
 		bool m_broken;
 		sf::Texture m_texture = [] () {
 			sf::Texture tex{};
-			tex.loadFromFile("Textures/Pot.png");
+			tex.loadFromFile("Textures/TestSprite.png");
 			return tex;
 		}();
 		static inline GB::AnimationSet::Ptr m_animations = []() -> GB::AnimationSet::Ptr {
 			GB::AnimationSet::Ptr animSet = std::make_shared<GB::AnimationSet>();
-			animSet->addAnimation({ {0, 0, 400, 400} });
-			animSet->addAnimation({ {400, 0, 400, 400} });
+			animSet->addAnimation({ {0, 0, 25, 25} });
+			animSet->addAnimation({ {25, 0, 25, 25} });
 			return animSet;
 		} ();
 	};
