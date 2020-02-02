@@ -9,7 +9,7 @@ using namespace REQ;
 
 #define APP_NAME "Requair"
 
-EventController::EventController() : CoreEventController(APP_NAME), mainRegion(std::make_unique<BossRegion>(""))
+EventController::EventController() : CoreEventController(APP_NAME), mainRegion(std::make_unique<BossRegion>("Levels/1.json"))
 {
 	// Set the camera to the same as the window
 	camera.reset(sf::FloatRect(0, 0, (float)getWindow().getSize().x, (float)getWindow().getSize().y));

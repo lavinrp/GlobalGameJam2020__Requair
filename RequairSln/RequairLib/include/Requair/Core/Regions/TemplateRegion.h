@@ -14,10 +14,5 @@ namespace REQ
     {
     public:
 		virtual void HandleEvent(sf::Event& even) = 0;
-        TemplateRegion() : m_pot(400, 400)
-        {
-            addDrawable(1, &m_pot);
-        }
-        Pot m_pot;
     };
 }

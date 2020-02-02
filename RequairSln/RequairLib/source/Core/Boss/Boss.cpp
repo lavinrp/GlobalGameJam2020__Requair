@@ -1,5 +1,6 @@
 #include <Requair/Core/Boss/Boss.h>
 
+#include <SFML/Window/Keyboard.hpp>
 #include <SFML/Window/Event.hpp>
 
 #include <GameBackbone/Core/AnimatedSprite.h>
@@ -34,34 +35,28 @@ Boss::Boss() {
 
 	setAnimationDelay(sf::seconds(0.3));
 
-	bossPos = getPosition();
 	//runAnimation(0, GB::ANIMATION_END_TYPE::ANIMATION_LOOP);
 }
 
-void Boss::MovementControls(sf::Event& event) {
-
-	if (sf::Event::KeyPressed) {
-
-		if (event.key.code == 71 || event.key.code == 97 || event.key.code == 65) {
-			bossPos.x -= bossSpeed.x;
-		}
-		else if (event.key.code == 72 || event.key.code == 100 || event.key.code == 68) {
-			bossPos.x += bossSpeed.x;
-		}
-
-		if (event.key.code == 73 || event.key.code == 119 || event.key.code == 87) {
-			bossPos.y -= bossSpeed.y;
-		}
-		else if (event.key.code == 74 || event.key.code == 115 || event.key.code == 83) {
-			bossPos.y += bossSpeed.y;
-		}
-	}
-}
-
-
-void Boss::update(sf::Int64 elapsedTime) {
-
+void Boss::update(sf::Int64 elapsedTime)
+{
 	AnimatedSprite::update(elapsedTime);
 
-	setPosition(bossPos);
+	// movement controls
+	auto moveVector = sf::Vector2f();
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Left))
+		moveVector.x -= 1;
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Right))
+		moveVector.x += 1;
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Up))
+		moveVector.y -= 1;
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Down))
+		moveVector.y += 1;
+	auto len = sqrt(moveVector.x * moveVector.x + moveVector.y * moveVector.y);
+	if (len > 1)
+	{
+		moveVector.x /= len;
+		moveVector.y /= len;
+	}
+	setPosition(getPosition() + bossSpeed * elapsedTime * moveVector);
 }

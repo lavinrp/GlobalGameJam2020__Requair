@@ -21,5 +21,6 @@ namespace REQ
 		//sf::RectangleShape boss;
 		REQ::Boss boss;
 		sf::Vector2f bossOrigin = sf::Vector2f(200, 200);
+        float maxInteractionDistance = 100.0;
     };
 }
