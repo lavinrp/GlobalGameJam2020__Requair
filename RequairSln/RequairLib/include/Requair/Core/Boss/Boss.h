@@ -5,8 +5,6 @@
 #include <SFML/Graphics/RectangleShape.hpp>
 #include <SFML/Window/Event.hpp>
 
-
-
 #include <GameBackbone/Core/AnimatedSprite.h>
 #include <GameBackbone/Core/AnimationSet.h>
 #include <GameBackbone/Core/GameRegion.h>
