@@ -25,7 +25,9 @@ Boss::Boss() {
 
 	GB::UniformAnimationSet::Ptr uniformAnimationSet = std::make_shared<GB::UniformAnimationSet>(sf::Vector2i(frameDimX, frameDimY));
 	uniformAnimationSet->addAnimation({
-		{0, 0},	
+		{0, 0}
+		});
+	uniformAnimationSet->addAnimation({
 		{1, 0},	
 		{2, 0},
 		});
@@ -41,16 +43,30 @@ Boss::Boss() {
 void Boss::update(sf::Int64 elapsedTime) {
 	AnimatedSprite::update(elapsedTime);
 
+	bool walking = false;
+
 	// movement controls
 	auto moveVector = sf::Vector2f();
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Left) || sf::Keyboard::isKeyPressed(sf::Keyboard::Key::A))
+	{
 		moveVector.x -= 1;
+		walking = true;
+	}
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Right) || sf::Keyboard::isKeyPressed(sf::Keyboard::Key::D))
+	{
 		moveVector.x += 1;
+		walking = true;
+	}
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Up) || sf::Keyboard::isKeyPressed(sf::Keyboard::Key::W))
+	{
 		moveVector.y -= 1;
+		walking = true;
+	}
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Down) || sf::Keyboard::isKeyPressed(sf::Keyboard::Key::S))
+	{
 		moveVector.y += 1;
+		walking = true;
+	}
 	auto len = sqrt(moveVector.x * moveVector.x + moveVector.y * moveVector.y);
 	if (len > 1)
 	{
@@ -58,4 +74,26 @@ void Boss::update(sf::Int64 elapsedTime) {
 		moveVector.y /= len;
 	}
 	setPosition(getPosition() + bossSpeed * elapsedTime * moveVector);
+	
+	// should walk
+	if (walking)
+	{
+		// currently stationary
+		if (!this->isAnimating())
+		{
+			this->runAnimation(1);
+		}
+	}
+	// should not walk
+	else
+	{
+		// currently walking
+		if (this->isAnimating())
+		{
+			this->setCurrentAnimation(0);
+			this->setCurrentFrame(0);
+			this->setAnimating(false);
+		}
+	}
+
 }
