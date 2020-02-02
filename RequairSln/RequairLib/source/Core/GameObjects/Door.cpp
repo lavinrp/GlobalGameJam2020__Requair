@@ -17,7 +17,7 @@ m_broken(false)
 	this->setAnimating(false);
 }
 
-void Door::Interact()
+void Door::Interact(Boss& boss)
 {
 
 	m_broken = !m_broken;

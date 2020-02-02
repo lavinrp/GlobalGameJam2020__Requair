@@ -8,6 +8,8 @@
 #include <GameBackbone/Core/UniformAnimationSet.h>
 #include <SFML/Graphics/Texture.hpp>
 
+#include <Requair/Core/Boss/Boss.h>
+
 namespace REQ
 {
 	class libRequair Door : public AnimatedItem
@@ -15,7 +17,7 @@ namespace REQ
 	public:
 		Door(float x, float y);
 
-		void Interact() override;
+		void Interact(Boss& boss) override;
 
 	private:
 		bool m_broken;
