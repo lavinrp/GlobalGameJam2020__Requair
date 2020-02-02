@@ -3,6 +3,11 @@
 cmake_minimum_required (VERSION 3.8)
 add_library(Requair SHARED
   "include/Requair.h"
+  "include/Requair/Core/Actions/Action.h"
+  "include/Requair/Core/Actions/ActionParser.h"
+  "include/Requair/Core/Actions/AnimationAction.h"
+  "include/Requair/Core/Actions/ForkAction.h"
+  "include/Requair/Core/Actions/MoveAction.h"
   "include/Requair/Core/Boss/Boss.h"
   "include/Requair/Core/EventController.h"
   "include/Requair/Core/GameObjects/AnimatedItem.h"
@@ -13,11 +18,17 @@ add_library(Requair SHARED
   "include/Requair/Core/Regions/BossRegion.h"
   "include/Requair/Core/Regions/HeroRegion.h"
   "include/Requair/Core/Regions/MainMenuRegion.h"
-  "include/Requair/Core/Regions/RuntimeRegion.h"
   "include/Requair/Core/Regions/TemplateRegion.h"
   "include/Requair/Utils/DllUtils.h"
   "include/Requair/Utils/json.hpp"
+  "include/Requair/Utils/JsonParserUtil.h"
   
+  
+  "source/Core/Actions/Action.cpp"
+  "source/Core/Actions/ActionParser.cpp"
+  "source/Core/Actions/AnimationAction.cpp"
+  "source/Core/Actions/ForkAction.cpp"
+  "source/Core/Actions/MoveAction.cpp"
   "source/Core/Boss/Boss.cpp"
   "source/Core/EventController.cpp"
   "source/Core/GameObjects/AnimatedItem.cpp"
@@ -27,9 +38,10 @@ add_library(Requair SHARED
   "source/Core/Regions/BossRegion.cpp"
   "source/Core/Regions/HeroRegion.cpp"
   "source/Core/Regions/MainMenuRegion.cpp"
-  "source/Core/Regions/RuntimeRegion.cpp"
   "source/Core/Regions/TemplateRegion.cpp"
   "source/Requair.cpp"
+  "source/Utils/JsonParserUtil.cpp"
+
 )
 set_target_properties(Requair PROPERTIES DEBUG_POSTFIX ${CMAKE_DEBUG_POSTFIX})
 

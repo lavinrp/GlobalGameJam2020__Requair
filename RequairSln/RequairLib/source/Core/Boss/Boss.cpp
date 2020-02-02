@@ -18,7 +18,7 @@ using namespace REQ;
 
 Boss::Boss() {
 
-	std::cout << spriteSheet.loadFromFile(R"(Textures/boss_man_walk.png)");
+	spriteSheet.loadFromFile(R"(Textures/boss_man_walk.png)");
 
 	int frameDimX = spriteSheet.getSize().x / 3;
 	int frameDimY = spriteSheet.getSize().y;
@@ -38,8 +38,7 @@ Boss::Boss() {
 	//runAnimation(0, GB::ANIMATION_END_TYPE::ANIMATION_LOOP);
 }
 
-void Boss::update(sf::Int64 elapsedTime)
-{
+void Boss::update(sf::Int64 elapsedTime) {
 	AnimatedSprite::update(elapsedTime);
 
 	// movement controls
