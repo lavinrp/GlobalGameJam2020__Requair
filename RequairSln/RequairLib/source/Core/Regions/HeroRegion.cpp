@@ -162,11 +162,16 @@ HeroRegion::HeroRegion(const std::string& jsonFile, sf::RenderWindow& window) : 
 	std::unique_ptr<AnimationAction> cutOffBossLegs = std::make_unique<AnimationAction>(m_boss, BossLeglessIdleSetup);
 	std::unique_ptr<MoveAction> armFly = std::make_unique<MoveAction>(m_arm, sf::Vector2f{ 7 * GridSize, 0 * GridSize }, armSetup);
 	std::unique_ptr<MoveAction> legFly = std::make_unique<MoveAction>(m_leg, sf::Vector2f{ 6 * GridSize, 5 * GridSize }, legSetup);
+	std::unique_ptr<MoveAction> heroRunsAwaySlowly = std::make_unique<MoveAction>(m_hero, sf::Vector2f{ 0 * GridSize, 0 * GridSize }, MoveSetup);
 
-	m_action = std::make_unique<ForkAction>(
-		std::make_unique<ForkAction>(std::move(armFly), std::move(legFly))
-		, std::move(cutOffBossLegs));
 
+	std::unique_ptr<MoveAction> moveThenSlash = std::make_unique<MoveAction>(m_hero, sf::Vector2f{ m_boss.getPosition().x + 0.3f*GridSize, m_boss.getPosition().y }, MoveSetup);
+	moveThenSlash->Then(std::make_unique<AnimationAction>(m_hero, HeroSwipeSetup, true))
+		.Then(std::make_unique<ForkAction>(
+			std::make_unique<ForkAction>(std::move(armFly), std::move(legFly)),
+			std::make_unique<ForkAction>(std::move(cutOffBossLegs), std::move(heroRunsAwaySlowly))));
+
+	m_action = std::move(moveThenSlash);
 	//m_action = std::make_unique<MoveAction>(m_hero, sf::Vector2f{ 7*128, 3 * 128 }, MoveSetupFun);
 	//m_action->Then(std::make_unique<MoveAction>(m_hero, sf::Vector2f{ 10 * 128, 3 * 128 }, MoveSetupFun))
 	//	.Then(std::make_unique<ForkAction>(
@@ -187,7 +192,7 @@ void HeroRegion::update(sf::Int64 elapsedTime)
 	m_action->update(elapsedTime);
 
 	sf::View view = m_window.getView();
-	view.setCenter(m_boss.getPosition());
+	view.setCenter(m_hero.getPosition());
 	m_window.setView(view);
 }
 
