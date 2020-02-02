@@ -18,10 +18,6 @@ using namespace REQ;
 
 HeroRegion::HeroRegion(const std::string& jsonFile, sf::RenderWindow& window) : TemplateRegion(), m_window(window)
 {
-	m_heroSpriteSheet.loadFromFile(R"(Textures/Hero Boi/HeroFull.png)");
-	m_bossSpriteSheet.loadFromFile(R"(Textures/Boss Man/BossFull.png)");
-	m_armSpriteSheet.loadFromFile(R"(Textures/Boss Man/boss man arm.png)");
-	m_legSpriteSheet.loadFromFile(R"(Textures/Boss Man/boss man legs.png)");
 	m_music = std::make_unique<sf::Music>();
 	if (m_music->openFromFile(R"(Music/fight.wav)"))
 	{
@@ -29,7 +25,11 @@ HeroRegion::HeroRegion(const std::string& jsonFile, sf::RenderWindow& window) : 
 		m_music->setLoop(true);
 	}
 
-	spriteSheet.loadFromFile(R"(Textures/boss_man_walk.png)");
+	m_heroSpriteSheet.loadFromFile(R"(Textures/Hero Boi/HeroFull.png)");
+	m_bossSpriteSheet.loadFromFile(R"(Textures/Boss Man/BossFull.png)");
+	m_armSpriteSheet.loadFromFile(R"(Textures/Boss Man/boss man arm.png)");
+	m_legSpriteSheet.loadFromFile(R"(Textures/Boss Man/boss man legs.png)");
+
 
 	GB::UniformAnimationSet::Ptr heroAnimationSet = std::make_shared<GB::UniformAnimationSet>(sf::Vector2i(GridSize, GridSize));
 	// Add an animation to the UniformAnimationSet
@@ -170,7 +170,7 @@ HeroRegion::HeroRegion(const std::string& jsonFile, sf::RenderWindow& window) : 
 	std::unique_ptr<AnimationAction> cutOffBossLegs = std::make_unique<AnimationAction>(m_boss, BossLeglessIdleSetup);
 	std::unique_ptr<MoveAction> armFly = std::make_unique<MoveAction>(m_arm, sf::Vector2f{ 7 * GridSize, 0 * GridSize }, armSetup, 0.0003);
 	std::unique_ptr<MoveAction> legFly = std::make_unique<MoveAction>(m_leg, sf::Vector2f{ 6 * GridSize, 5 * GridSize }, legSetup, 0.0003);
-	std::unique_ptr<MoveAction> heroRunsAwaySlowly = std::make_unique<MoveAction>(m_hero, sf::Vector2f{ 0 * GridSize, 0 * GridSize }, MoveSetup, 0.00003);
+	std::unique_ptr<MoveAction> heroRunsAwaySlowly = std::make_unique<MoveAction>(m_hero, sf::Vector2f{ -3 * GridSize, 0 * GridSize }, MoveSetup, 0.00023);
 
 
 	std::unique_ptr<MoveAction> moveThenSlash = std::make_unique<MoveAction>(m_hero, sf::Vector2f{ m_boss.getPosition().x + 0.3f*GridSize, m_boss.getPosition().y }, MoveSetup, 0.00015);
