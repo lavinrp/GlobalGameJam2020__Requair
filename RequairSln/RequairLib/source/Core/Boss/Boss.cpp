@@ -39,6 +39,8 @@ Boss::Boss() : PhysicalObject(5) {
 
 	setAnimationDelay(sf::seconds(0.3));
 
+	setScale(0.75f, 0.75f);
+
 	//runAnimation(0, GB::ANIMATION_END_TYPE::ANIMATION_LOOP);
 }
 
