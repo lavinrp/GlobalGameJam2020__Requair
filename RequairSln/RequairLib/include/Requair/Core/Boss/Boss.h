@@ -26,6 +26,7 @@ namespace REQ
 		void GainArm();
 		void LoseArm();
 		void update(sf::Int64 elapsedTime) override;
+		bool willHitObjects(const std::vector<PhysicalObject*>& closeObjects);
 
 		void Translate(sf::Vector2f offset) override;
 		sf::FloatRect GetObjectBounds() const override;

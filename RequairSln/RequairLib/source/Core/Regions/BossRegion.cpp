@@ -29,6 +29,7 @@ BossRegion::BossRegion(std::string jsonFile, sf::RenderWindow& window) : m_jsonF
 
 	auto [item_list, physical_object_list] = ProcessJson();
 	boss.setPosition(bossOrigin);
+	boss.scale(0.75,0.75);
 	m_item_list = std::move(item_list);
 	m_physical_object_list = std::move(physical_object_list);
 
@@ -201,7 +202,7 @@ void BossRegion::update(sf::Int64 elapsedTime)
 
 	//elapsedTime = 1;
 	TemplateRegion::update(elapsedTime);
-	for (int i = 0; i < m_physical_object_list.size(); i++)
+	/*for (int i = 0; i < m_physical_object_list.size(); i++)
 	{
 		auto obj1 = m_physical_object_list[i].get();
 		for (int j = i + 1; j < m_physical_object_list.size(); j++)
@@ -210,10 +211,25 @@ void BossRegion::update(sf::Int64 elapsedTime)
 			obj1->Collide(*obj2);
 		}
 		boss.Collide(*obj1);
+	}*/
+
+	// If something is closish to boss, ask boss if it will hit it moving
+	std::vector<PhysicalObject*> closeObjects;
+	for (auto& object : m_physical_object_list)
+	{
+		float xDistance = std::abs(object->GetObjectPosition().x - boss.GetObjectPosition().x);
+		float yDistance = std::abs(object->GetObjectPosition().y - boss.GetObjectPosition().y);
+		if (xDistance < 128 || yDistance < 128)
+		{
+			closeObjects.push_back(object.get());
+		}
+	}
+	if (boss.willHitObjects(closeObjects))
+	{
+		boss.update(elapsedTime);
 	}
 
 	TemplateRegion::update(elapsedTime);
-	boss.update(elapsedTime);
 
 	sf::View view = m_window.getView();
 	view.setCenter(boss.getPosition());

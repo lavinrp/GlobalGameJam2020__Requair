@@ -42,32 +42,25 @@ Boss::Boss() : PhysicalObject(5) {
 	//runAnimation(0, GB::ANIMATION_END_TYPE::ANIMATION_LOOP);
 }
 
-void Boss::update(sf::Int64 elapsedTime) {
-	AnimatedSprite::update(elapsedTime);
-
-	bool walking = false;
-
+static sf::Vector2f getVelocity()
+{
 	// movement controls
 	auto moveVector = sf::Vector2f();
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Left) || sf::Keyboard::isKeyPressed(sf::Keyboard::Key::A))
 	{
 		moveVector.x -= 1;
-		walking = true;
 	}
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Right) || sf::Keyboard::isKeyPressed(sf::Keyboard::Key::D))
 	{
 		moveVector.x += 1;
-		walking = true;
 	}
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Up) || sf::Keyboard::isKeyPressed(sf::Keyboard::Key::W))
 	{
 		moveVector.y -= 1;
-		walking = true;
 	}
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Down) || sf::Keyboard::isKeyPressed(sf::Keyboard::Key::S))
 	{
 		moveVector.y += 1;
-		walking = true;
 	}
 	auto len = sqrt(moveVector.x * moveVector.x + moveVector.y * moveVector.y);
 	if (len > 1)
@@ -78,9 +71,37 @@ void Boss::update(sf::Int64 elapsedTime) {
 	sf::Vector2f initial_velocity;
 	initial_velocity.x = moveVector.x;
 	initial_velocity.y = moveVector.y;
-	SetVelocity(initial_velocity);
+	return initial_velocity;
+}
 
-	setPosition(getPosition() + bossSpeed * elapsedTime * moveVector);
+bool Boss::willHitObjects(const std::vector<PhysicalObject*>& closeObjects)
+{
+	sf::Vector2f velocity = getVelocity();
+	for (const auto object : closeObjects)
+	{
+		sf::FloatRect newRect = sf::FloatRect{ 
+			{this->getGlobalBounds().left + velocity.x, this->getGlobalBounds().top + velocity.y},
+			{this->getGlobalBounds().width, this->getGlobalBounds().width} };
+		if (newRect.intersects(object->GetObjectBounds()))
+		{
+			return false;
+		}
+	}
+	return true;
+}
+
+
+void Boss::update(sf::Int64 elapsedTime) {
+	AnimatedSprite::update(elapsedTime);
+
+	bool walking = false;
+	
+	sf::Vector2f velocity = getVelocity();
+	if (velocity.x > 0 || velocity.y > 0)
+	{
+		walking = true;
+	}
+	setPosition(getPosition() + bossSpeed * elapsedTime * velocity);
 	
 	// should walk
 	if (walking)
