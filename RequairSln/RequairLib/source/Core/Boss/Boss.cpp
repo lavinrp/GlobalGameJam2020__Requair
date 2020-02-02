@@ -17,7 +17,7 @@ using namespace REQ;
 
 Boss::Boss() {
 
-	std::cout << spriteSheet.loadFromFile(R"(Textures/boss_man_walk.png)");
+	spriteSheet.loadFromFile(R"(Textures/boss_man_walk.png)");
 
 	int frameDimX = spriteSheet.getSize().x / 3;
 	int frameDimY = spriteSheet.getSize().y;
@@ -35,13 +35,14 @@ Boss::Boss() {
 	setAnimationDelay(sf::seconds(0.3));
 
 	bossPos = getPosition();
-	//runAnimation(0, GB::ANIMATION_END_TYPE::ANIMATION_LOOP);
+	runAnimation(0, GB::ANIMATION_END_TYPE::ANIMATION_LOOP);
 }
 
 void Boss::MovementControls(sf::Event& event) {
 
 	if (sf::Event::KeyPressed) {
 
+		
 		if (event.key.code == 71 || event.key.code == 97 || event.key.code == 65) {
 			bossPos.x -= bossSpeed.x;
 		}
