@@ -14,7 +14,7 @@ namespace REQ
 		Arm(float x, float y);
 
 		void Interact() override;
-		void IsCollectible() override;
+		bool IsCollectible() override;
 	private:
 		sf::Texture m_texture = []() {
 			sf::Texture tex{};
