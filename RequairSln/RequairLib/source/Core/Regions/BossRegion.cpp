@@ -1,6 +1,6 @@
 #include <Requair/Core/Regions/BossRegion.h>
-//#include <Requair/Core/GameObjects/Arm.h>
-//#include <Requair/Core/GameObjects/Leg.h>
+#include <Requair/Core/GameObjects/Arm.h>
+#include <Requair/Core/GameObjects/Leg.h>
 #include <Requair/Core/GameObjects/Pot.h>
 #include <Requair/Core/GameObjects/Key.h>
 
@@ -24,17 +24,17 @@ BossRegion::BossRegion(std::string jsonFile) : m_jsonFile(std::move(jsonFile))
 	addDrawable(4, pot.get());
 	m_item_list.push_back(std::move(pot));
 
-	//auto arm = std::make_unique<Arm>(200, 100);
-	//addDrawable(3, arm.get());
-	//m_item_list.push_back(std::move(arm));
+	auto arm = std::make_unique<Arm>(200, 100);
+	addDrawable(3, arm.get());
+	m_item_list.push_back(std::move(arm));
 
-	//auto leg = std::make_unique<Leg>(300, 100);
-	//addDrawable(3, leg.get());
-	//m_item_list.push_back(std::move(leg));
+	auto leg = std::make_unique<Leg>(300, 100);
+	addDrawable(3, leg.get());
+	m_item_list.push_back(std::move(leg));
 
-	//auto key = std::make_unique<Key>(400, 100);
-	//addDrawable(3, key.get());
-	//m_item_list.push_back(std::move(key));
+	auto key = std::make_unique<Key>(400, 100);
+	addDrawable(3, key.get());
+	m_item_list.push_back(std::move(key));
 
 
 	addDrawable(5, &boss);

@@ -18,7 +18,7 @@ namespace REQ
 	private:
 		sf::Texture m_texture = [] () {
 			sf::Texture tex{};
-			tex.loadFromFile("Textures/TestSprite.png");
+			tex.loadFromFile("Textures/Wall tile.png");
 			return tex;
 		}();
 	};

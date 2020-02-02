@@ -3,6 +3,9 @@
 #include <Requair/Utils/DllUtils.h>
 #include <Requair/Core/GameObjects/Item.h>
 #include <Requair/Core/GameObjects/AnimatedItem.h>
+
+#include <GameBackbone/Core/UniformAnimationSet.h>
+
 #include <SFML/Graphics/Texture.hpp>
 
 namespace REQ
@@ -22,9 +25,12 @@ namespace REQ
 			return tex;
 		}();
 		static inline GB::AnimationSet::Ptr m_animations = []() -> GB::AnimationSet::Ptr {
-			GB::AnimationSet::Ptr animSet = std::make_shared<GB::AnimationSet>();
-			animSet->addAnimation({ {0, 0, 400, 400} });
-			animSet->addAnimation({ {400, 0, 400, 400} });
+			GB::UniformAnimationSet::Ptr animSet = std::make_shared<GB::UniformAnimationSet>(sf::Vector2i{128, 128});
+			animSet->addAnimation({
+				{0, 0},
+				{1, 0},
+				{2, 0}
+				});
 			return animSet;
 		} ();
 	};
