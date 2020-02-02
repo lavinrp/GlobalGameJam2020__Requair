@@ -22,6 +22,7 @@ namespace REQ
 			return tex;
 		}();
 
+		bool hasBeenGrabbed;
 	};
 
 }

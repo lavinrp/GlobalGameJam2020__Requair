@@ -109,5 +109,16 @@ void REQ::Boss::LoseLegs()
 {
 	setTexture(m_noLegsTexture);
 	bossSpeed *= 0.5f;
+}
 
+void REQ::Boss::GainArm()
+{
+	setTexture(m_fullBodyTexture);
+	//bossSpeed *= 2.0f;
+}
+
+void REQ::Boss::LoseArm()
+{
+	setTexture(m_noLegsTexture);
+	//bossSpeed *= 0.5f;
 }

@@ -23,6 +23,8 @@ namespace REQ
 		Boss();
 		void GainLegs();
 		void LoseLegs();
+		void GainArm();
+		void LoseArm();
 		void update(sf::Int64 elapsedTime) override;
 	private:
 		float bossSpeed = .00015f;
