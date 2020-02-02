@@ -28,6 +28,7 @@ BossRegion::BossRegion(std::string jsonFile, sf::RenderWindow& window) : m_jsonF
 	}*/
 
 	auto [item_list, physical_object_list] = ProcessJson();
+	boss.setPosition(bossOrigin);
 	m_item_list = std::move(item_list);
 	m_physical_object_list = std::move(physical_object_list);
 
@@ -198,6 +199,18 @@ void BossRegion::update(sf::Int64 elapsedTime)
 		}
 	}
 
+	//elapsedTime = 1;
+	TemplateRegion::update(elapsedTime);
+	for (int i = 0; i < m_physical_object_list.size(); i++)
+	{
+		auto obj1 = m_physical_object_list[i].get();
+		for (int j = i + 1; j < m_physical_object_list.size(); j++)
+		{
+			auto obj2 = m_physical_object_list[j].get();
+			obj1->Collide(*obj2);
+		}
+		boss.Collide(*obj1);
+	}
 
 	TemplateRegion::update(elapsedTime);
 	boss.update(elapsedTime);

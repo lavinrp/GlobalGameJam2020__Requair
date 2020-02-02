@@ -7,16 +7,17 @@
 #include <GameBackbone/Core/AnimationSet.h>
 #include <GameBackbone/Core/GameRegion.h>
 #include <GameBackbone/Core/UniformAnimationSet.h>
-
+#include <Requair/Core/GameObjects/PhysicalObject.h>
 #include <SFML/Graphics.hpp>
 #include <SFML/Graphics/Sprite.hpp>
+#include <Requair/Core/GameObjects/PhysicalObject.h>
 
 #include <memory>
 #include <cmath>
 
 using namespace REQ;
 
-Boss::Boss() {
+Boss::Boss() : PhysicalObject(5) {
 
 	m_fullBodyTexture.loadFromFile(R"(Textures/boss_man_walk.png)");
 	m_noLegsTexture.loadFromFile(R"(Textures/boss_man_sans_A_L_walk.png)");
@@ -74,6 +75,11 @@ void Boss::update(sf::Int64 elapsedTime) {
 		moveVector.x /= len;
 		moveVector.y /= len;
 	}
+	sf::Vector2f initial_velocity;
+	initial_velocity.x = moveVector.x;
+	initial_velocity.y = moveVector.y;
+	SetVelocity(initial_velocity);
+
 	setPosition(getPosition() + bossSpeed * elapsedTime * moveVector);
 	
 	// should walk
@@ -121,4 +127,19 @@ void REQ::Boss::LoseArm()
 {
 	setTexture(m_noLegsTexture);
 	//bossSpeed *= 0.5f;
+}
+
+void Boss::Translate(sf::Vector2f offset)
+{
+	move(offset);
+}
+
+sf::FloatRect Boss::GetObjectBounds() const
+{
+	return getGlobalBounds();
+}
+
+sf::Vector2f Boss::GetObjectPosition() const
+{
+	return getPosition();
 }

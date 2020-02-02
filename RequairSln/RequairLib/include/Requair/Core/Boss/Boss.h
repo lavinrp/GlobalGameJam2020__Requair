@@ -9,13 +9,15 @@
 #include <GameBackbone/Core/AnimationSet.h>
 #include <GameBackbone/Core/GameRegion.h>
 
+#include <Requair/Core/GameObjects/PhysicalObject.h>
+
 #include <SFML/Graphics.hpp>
 #include <SFML/Graphics/Sprite.hpp>
 
 
 namespace REQ
 {
-	class libRequair Boss : public GB::AnimatedSprite
+	class libRequair Boss : public GB::AnimatedSprite, public REQ::PhysicalObject
 	{
 	public:
 		Boss();
@@ -24,6 +26,10 @@ namespace REQ
 		void GainArm();
 		void LoseArm();
 		void update(sf::Int64 elapsedTime) override;
+
+		void Translate(sf::Vector2f offset) override;
+		sf::FloatRect GetObjectBounds() const override;
+		sf::Vector2f GetObjectPosition() const override;
 	private:
 		float bossSpeed = .00015f;
 		sf::Texture m_fullBodyTexture;
