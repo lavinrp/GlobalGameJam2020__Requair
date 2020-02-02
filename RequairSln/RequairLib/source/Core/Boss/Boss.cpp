@@ -1,5 +1,5 @@
 #include <Requair/Core/Boss/Boss.h>
-
+#include <Requair/Core/GameObjects/PhysicalObject.h>
 #include <SFML/Window/Keyboard.hpp>
 #include <SFML/Window/Event.hpp>
 
@@ -16,7 +16,7 @@
 
 using namespace REQ;
 
-Boss::Boss() {
+Boss::Boss():PhysicalObject(5) {
 
 	spriteSheet.loadFromFile(R"(Textures/boss_man_walk.png)");
 
@@ -67,12 +67,18 @@ void Boss::update(sf::Int64 elapsedTime) {
 		moveVector.y += 1;
 		walking = true;
 	}
+
 	auto len = sqrt(moveVector.x * moveVector.x + moveVector.y * moveVector.y);
 	if (len > 1)
 	{
 		moveVector.x /= len;
 		moveVector.y /= len;
 	}
+	sf::Vector2f initial_velocity;
+	initial_velocity.x = moveVector.x;
+	initial_velocity.y = moveVector.y;
+	SetVelocity(initial_velocity);
+
 	setPosition(getPosition() + bossSpeed * elapsedTime * moveVector);
 	
 	// should walk
@@ -96,4 +102,18 @@ void Boss::update(sf::Int64 elapsedTime) {
 		}
 	}
 
+}
+void Boss::Translate(sf::Vector2f offset)
+{
+	move(offset);
+}
+
+sf::FloatRect Boss::GetObjectBounds() const
+{
+	return getGlobalBounds();
+}
+
+sf::Vector2f Boss::GetObjectPosition() const
+{
+	return getPosition();
 }

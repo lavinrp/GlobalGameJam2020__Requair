@@ -35,7 +35,7 @@ namespace REQ
 
         // Player (boss)
 		REQ::Boss boss;
-		sf::Vector2f bossOrigin = sf::Vector2f(200, 200);
+		sf::Vector2f bossOrigin = sf::Vector2f(600, 600);
         float maxInteractionDistance = 100.0;
 
         sf::RenderWindow& m_window;

@@ -1,5 +1,5 @@
 #include <Requair/Core/GameObjects/PhysicalObject.h>
-
+#include <cmath>
 using namespace REQ;
 
 PhysicalObject::PhysicalObject(unsigned int weight)
@@ -11,14 +11,16 @@ void PhysicalObject::Collide(PhysicalObject& other)
 {
 	PhysicalObject& lighterObject = this->GetWeight() < other.GetWeight() ? *this : other;
 	PhysicalObject& heavierObject = this->GetWeight() > other.GetWeight() ? *this : other;
-	while (other.GetObjectBounds().intersects(this->GetObjectBounds()) ||
+	if (other.GetObjectBounds().intersects(this->GetObjectBounds()) || 
 		other.GetObjectBounds().contains(this->GetObjectPosition()))
 	{
 		sf::Vector2f velocity_vec = lighterObject.GetVelocity();
-		float unit_vec_norm = velocity_vec.x * velocity_vec.x + velocity_vec.y * velocity_vec.y;
-		if (unit_vec_norm > 1.0e-9) {
+		float unit_vec_norm = velocity_vec.x*velocity_vec.x + velocity_vec.y*velocity_vec.y;
+		float scale_unit_translate(1.0);
+		if (unit_vec_norm > 1.0e-9){
 			auto light_postions = lighterObject.GetObjectPosition();
 			auto heavy_bounds = heavierObject.GetObjectBounds();
+			scale_unit_translate = 0.01*std::max(heavy_bounds.height, heavy_bounds.width);
 			// find which side I am
 			//      1
 			//   -----------
@@ -26,31 +28,55 @@ void PhysicalObject::Collide(PhysicalObject& other)
 			//   |         |
 			//   -----------
 			//       3
-
-			if (light_postions.x <= heavy_bounds.left) {
-				if (light_postions.y <= heavy_bounds.top) {
-					velocity_vec.y = -velocity_vec.y * 0.8;
-					velocity_vec.x = velocity_vec.x * 0.8;
-				}
-				else if (light_postions.y >= (heavy_bounds.top + heavy_bounds.height))
+			
+			if (light_postions.x < heavy_bounds.left){
+				if(light_postions.y < heavy_bounds.top){
+					velocity_vec.x =  velocity_vec.x*0.8;
+					velocity_vec.y = -velocity_vec.y*0.8;
+				} else if (abs(light_postions.y - (heavy_bounds.top+heavy_bounds.height))<1.0)
 				{
-					velocity_vec.y = -velocity_vec.y * 0.8;
-					velocity_vec.x = velocity_vec.x * 0.8;
+					velocity_vec.x =  velocity_vec.x*0.8;
+					velocity_vec.y = -velocity_vec.y*0.8;
 				}
-				else
+				else 
 				{
-					velocity_vec.x = -velocity_vec.x * 0.8;
-					velocity_vec.y = velocity_vec.y * 0.8;
+					velocity_vec.x = -velocity_vec.x*0.8;
+					velocity_vec.y =  velocity_vec.y*0.8;
 				}
-
-			}
-			else
+				
+			} else if (abs(light_postions.x - (heavy_bounds.left+heavy_bounds.width))<1.0)
 			{
-				velocity_vec.x = -velocity_vec.x * 0.8;
-				velocity_vec.y = velocity_vec.y * 0.8;
-			}
+				if(light_postions.y < heavy_bounds.top){
+					velocity_vec.y = -velocity_vec.y*0.8;
+					velocity_vec.x =  velocity_vec.x*0.8;
+				} else if (abs(light_postions.y - (heavy_bounds.top+heavy_bounds.height))<1.0)
+				{
+					velocity_vec.y = -velocity_vec.y*0.8;
+					velocity_vec.x =  velocity_vec.x*0.8;
+				}
+				else 
+				{
+					velocity_vec.x = -velocity_vec.x*0.8;
+					velocity_vec.y =  velocity_vec.y*0.8;
+				}
+			} else 
+				if(light_postions.y < heavy_bounds.top){
+					velocity_vec.y = -velocity_vec.y*0.8;
+					velocity_vec.x =  velocity_vec.x*0.8;
+				} else if (abs(light_postions.y - (heavy_bounds.top+heavy_bounds.height))<1.0)
+				{
+					velocity_vec.y = -velocity_vec.y*0.8;
+					velocity_vec.x =  velocity_vec.x*0.8;
+				}
+				else 
+				{
+					velocity_vec.x = -velocity_vec.x*0.8;
+					velocity_vec.y =  velocity_vec.y*0.8;
+				}
+		sf::Vector2f unit_translate(scale_unit_translate*velocity_vec.x/unit_vec_norm,scale_unit_translate*velocity_vec.y/unit_vec_norm);
+		lighterObject.Translate(unit_translate);
 		}
-
+		
 		lighterObject.SetVelocity(velocity_vec);
 	}
 }
