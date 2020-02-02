@@ -18,5 +18,5 @@ bool MoveAction::Perform(sf::Int64 elapsedTime)
             m_isFinished = true;
         }
     }
-    return true;
+    return m_isFinished;
 }
