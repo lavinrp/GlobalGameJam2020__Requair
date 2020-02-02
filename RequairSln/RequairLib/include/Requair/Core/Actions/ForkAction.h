@@ -10,7 +10,7 @@ namespace REQ
     class libRequair ForkAction : public Action
     {
     public:
-        ForkAction::ForkAction(std::unique_ptr<Action> nextAction, std::unique_ptr<Action> otherNextAction);
+        ForkAction(std::unique_ptr<Action> nextAction, std::unique_ptr<Action> otherNextAction);
 
         virtual bool Perform(sf::Int64 elapsedTime);
 
