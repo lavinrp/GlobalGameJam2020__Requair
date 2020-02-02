@@ -78,7 +78,7 @@ HeroRegion::HeroRegion(const std::string& jsonFile, sf::RenderWindow& window) : 
 		});
 
 	bossAnimationSet->addAnimation({ // Idle no legs
-		{0, 2},
+		{0, 3},
 		});
 
 
@@ -159,8 +159,13 @@ HeroRegion::HeroRegion(const std::string& jsonFile, sf::RenderWindow& window) : 
 		addDrawable(1, &m_leg);
 	};
 
-	//std::unique_ptr<MoveAction> moveThenSlash = std::make_unique<MoveAction>(m_hero, sf::Vector2f{ 10 * 128, 5 * 128 }, MoveSetupFun);
-	//moveThenSlash->Then(std::make_unique<AnimationAction>(m_hero, SwipeSetupFun, true));
+	std::unique_ptr<AnimationAction> cutOffBossLegs = std::make_unique<AnimationAction>(m_boss, BossLeglessIdleSetup);
+	std::unique_ptr<MoveAction> armFly = std::make_unique<MoveAction>(m_arm, sf::Vector2f{ 7 * GridSize, 0 * GridSize }, armSetup);
+	std::unique_ptr<MoveAction> legFly = std::make_unique<MoveAction>(m_leg, sf::Vector2f{ 6 * GridSize, 5 * GridSize }, legSetup);
+
+	m_action = std::make_unique<ForkAction>(
+		std::make_unique<ForkAction>(std::move(armFly), std::move(legFly))
+		, std::move(cutOffBossLegs));
 
 	//m_action = std::make_unique<MoveAction>(m_hero, sf::Vector2f{ 7*128, 3 * 128 }, MoveSetupFun);
 	//m_action->Then(std::make_unique<MoveAction>(m_hero, sf::Vector2f{ 10 * 128, 3 * 128 }, MoveSetupFun))
@@ -182,7 +187,7 @@ void HeroRegion::update(sf::Int64 elapsedTime)
 	m_action->update(elapsedTime);
 
 	sf::View view = m_window.getView();
-	view.setCenter(m_hero.getPosition());
+	view.setCenter(m_boss.getPosition());
 	m_window.setView(view);
 }
 

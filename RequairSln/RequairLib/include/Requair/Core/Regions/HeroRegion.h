@@ -35,7 +35,7 @@ namespace REQ
 
         GB::AnimatedSprite m_arm;
         GB::AnimatedSprite m_leg;
-        std::unique_ptr<MoveAction> m_action;
+        std::unique_ptr<Action> m_action;
 
         // ActionSet = Start Point, End Point, Action, Other Sprite/Object that moves?
         /*using ActionSet = std::tuple<sf::Vector2f, sf::Vector2f, int>;
