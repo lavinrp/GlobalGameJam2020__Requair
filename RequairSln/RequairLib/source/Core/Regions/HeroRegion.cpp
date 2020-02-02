@@ -2,6 +2,8 @@
 
 
 #include <Requair/Core/Actions/AnimationAction.h>
+#include <Requair/Core/Actions/ForkAction.h>
+#include <Requair/Core/Actions/MoveAction.h>
 
 #include <GameBackbone/Core/UniformAnimationSet.h>
 
@@ -48,7 +50,12 @@ HeroRegion::HeroRegion(const std::string& jsonFile, sf::RenderWindow& window) : 
 	
 
 	m_action = std::make_unique<MoveAction>(m_hero, sf::Vector2f{ 7*128, 3 * 128 });
-	m_action->Then(std::make_unique<MoveAction>(m_hero, sf::Vector2f{ 10 * 128, 3 * 128 }));
+	m_action->Then(std::make_unique<MoveAction>(m_hero, sf::Vector2f{ 10 * 128, 3 * 128 }))
+		.Then(std::make_unique<ForkAction>(
+			std::make_unique<MoveAction>(m_hero, sf::Vector2f{ 10 * 128, 5 * 128 }),
+			std::make_unique<MoveAction>(m_pot, sf::Vector2f{ 10 * 128, 1 * 128 })
+		));
+
 
 	/*MoveAction banana{ m_hero, sf::Vector2f{ 0.0f, 0.0f }, sf::Vector2f{ 10.0f, 10.0f } };
 	banana.Then(MoveAction{ GB::AnimatedSprite{}, sf::Vector2f{ 10.0f, 10.0f } })
