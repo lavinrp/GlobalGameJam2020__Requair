@@ -1,4 +1,8 @@
 #include <Requair/Core/Regions/BossRegion.h>
+//#include <Requair/Core/GameObjects/Arm.h>
+//#include <Requair/Core/GameObjects/Leg.h>
+#include <Requair/Core/GameObjects/Pot.h>
+#include <Requair/Core/GameObjects/Key.h>
 
 #include <Requair/Utils/JsonParserUtil.h>
 #include <Requair/Utils/json.hpp>
@@ -19,9 +23,20 @@ BossRegion::BossRegion(std::string jsonFile) : m_jsonFile(std::move(jsonFile))
 	auto pot = std::make_unique<Pot>(400, 300);
 	addDrawable(4, pot.get());
 	m_item_list.push_back(std::move(pot));
-	auto pot2 = std::make_unique<Pot>(350, 300);
-	addDrawable(3, pot2.get());
-	m_item_list.push_back(std::move(pot2));
+
+	//auto arm = std::make_unique<Arm>(200, 100);
+	//addDrawable(3, arm.get());
+	//m_item_list.push_back(std::move(arm));
+
+	//auto leg = std::make_unique<Leg>(300, 100);
+	//addDrawable(3, leg.get());
+	//m_item_list.push_back(std::move(leg));
+
+	//auto key = std::make_unique<Key>(400, 100);
+	//addDrawable(3, key.get());
+	//m_item_list.push_back(std::move(key));
+
+
 	addDrawable(5, &boss);
 }
 

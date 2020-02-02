@@ -14,10 +14,10 @@ namespace REQ
 	public:
 		using Item::Item;
 
-		void Interact() override = 0;
-
 		sf::FloatRect GetObjectBounds() const override;
+
 		sf::Vector2f GetObjectPosition() const override;
+
 		void Translate(sf::Vector2f velocity) override;
 		
 	};
