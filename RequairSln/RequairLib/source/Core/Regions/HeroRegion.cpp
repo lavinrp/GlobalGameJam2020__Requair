@@ -20,6 +20,7 @@ HeroRegion::HeroRegion(const std::string& jsonFile, sf::RenderWindow& window) : 
 {
 	spriteSheet.loadFromFile(R"(Textures/Hero Boi/hero boi walk.png)");
 	spriteSheet2.loadFromFile(R"(Textures/Hero Boi/hero boi attack.png)");
+	m_bossSpriteSheet.loadFromFile(R"(Textures/boss_man_walk.png)");
 
 	GB::UniformAnimationSet::Ptr uniformAnimationSet = std::make_shared<GB::UniformAnimationSet>(sf::Vector2i(GridSize, GridSize));
 	// Add an animation to the UniformAnimationSet
@@ -37,48 +38,45 @@ HeroRegion::HeroRegion(const std::string& jsonFile, sf::RenderWindow& window) : 
 	// Create an AnimatedSprite to display the UniformAnimation
 	m_hero.setTexture(spriteSheet);
 	m_hero.setAnimations(uniformAnimationSet);
-	m_pot.setTexture(spriteSheet);
-	m_pot.setAnimations(uniformAnimationSet);
-
-	m_hero.setPosition(10 * 128, 3 * 128);
-	m_pot.setPosition(10 * 128, 3 * 128);
-
-	// Tell the AnimatedSprite to update every one second
+	m_hero.setPosition(10 * GridSize, 3 * GridSize);
 	m_hero.setAnimationDelay(sf::seconds(0.3));
-	// Tell the AnimatedSprite to begin running its second animation
-	// The animation will reverse directions every time it reaches the beginning or end
-	m_hero.runAnimation(0, GB::ANIMATION_END_TYPE::ANIMATION_LOOP);
-	m_pot.runAnimation(0, GB::ANIMATION_END_TYPE::ANIMATION_LOOP);
 
-	// Tell the region to draw the AnimatedSprite
+	m_boss.setTexture(m_bossSpriteSheet);
+	m_boss.setAnimations(uniformAnimationSet);
+	m_boss.setPosition(1 * GridSize, 2 * GridSize);
+	m_boss.setAnimationDelay(sf::seconds(0.3));
+
+	//// Tell the region to draw the AnimatedSprite
 	addDrawable(1, &m_hero);
-	addDrawable(1, &m_pot);
-	
-	auto MoveSetupFun = [&](GB::AnimatedSprite& animSprite) -> void
-	{
-		animSprite.setTexture(spriteSheet);
-		animSprite.runAnimation(0, GB::ANIMATION_END_TYPE::ANIMATION_LOOP);
-	};
-	auto SwipeSetupFun = [&](GB::AnimatedSprite& animSprite) -> void
-	{
-		animSprite.setTexture(spriteSheet2);
-		animSprite.runAnimation(1, GB::ANIMATION_END_TYPE::ANIMATION_STOP);
-	};
+	addDrawable(1, &m_boss);
 
-	std::unique_ptr<MoveAction> moveThenSlash = std::make_unique<MoveAction>(m_hero, sf::Vector2f{ 10 * 128, 5 * 128 }, MoveSetupFun);
-	moveThenSlash->Then(std::make_unique<AnimationAction>(m_hero, SwipeSetupFun, true));
+	//addDrawable(1, &m_pot);
+	//
+	//auto MoveSetupFun = [&](GB::AnimatedSprite& animSprite) -> void
+	//{
+	//	animSprite.setTexture(spriteSheet);
+	//	animSprite.runAnimation(0, GB::ANIMATION_END_TYPE::ANIMATION_LOOP);
+	//};
+	//auto SwipeSetupFun = [&](GB::AnimatedSprite& animSprite) -> void
+	//{
+	//	animSprite.setTexture(spriteSheet2);
+	//	animSprite.runAnimation(1, GB::ANIMATION_END_TYPE::ANIMATION_STOP);
+	//};
 
-	m_action = std::make_unique<MoveAction>(m_hero, sf::Vector2f{ 7*128, 3 * 128 }, MoveSetupFun);
-	m_action->Then(std::make_unique<MoveAction>(m_hero, sf::Vector2f{ 10 * 128, 3 * 128 }, MoveSetupFun))
-		.Then(std::make_unique<ForkAction>(
-			std::move(moveThenSlash),
-			std::make_unique<MoveAction>(m_pot, sf::Vector2f{ 10 * 128, 1 * 128 }, MoveSetupFun)
-		));
+	//std::unique_ptr<MoveAction> moveThenSlash = std::make_unique<MoveAction>(m_hero, sf::Vector2f{ 10 * 128, 5 * 128 }, MoveSetupFun);
+	//moveThenSlash->Then(std::make_unique<AnimationAction>(m_hero, SwipeSetupFun, true));
+
+	//m_action = std::make_unique<MoveAction>(m_hero, sf::Vector2f{ 7*128, 3 * 128 }, MoveSetupFun);
+	//m_action->Then(std::make_unique<MoveAction>(m_hero, sf::Vector2f{ 10 * 128, 3 * 128 }, MoveSetupFun))
+	//	.Then(std::make_unique<ForkAction>(
+	//		std::move(moveThenSlash),
+	//		std::make_unique<MoveAction>(m_pot, sf::Vector2f{ 10 * 128, 1 * 128 }, MoveSetupFun)
+	//	));
 
 
-	/*MoveAction banana{ m_hero, sf::Vector2f{ 0.0f, 0.0f }, sf::Vector2f{ 10.0f, 10.0f } };
-	banana.Then(MoveAction{ GB::AnimatedSprite{}, sf::Vector2f{ 10.0f, 10.0f } })
-		.Then(AnimationAction{ GB::AnimatedSprite{} });*/
+	///*MoveAction banana{ m_hero, sf::Vector2f{ 0.0f, 0.0f }, sf::Vector2f{ 10.0f, 10.0f } };
+	//banana.Then(MoveAction{ GB::AnimatedSprite{}, sf::Vector2f{ 10.0f, 10.0f } })
+	//	.Then(AnimationAction{ GB::AnimatedSprite{} });*/
 
 }
 
