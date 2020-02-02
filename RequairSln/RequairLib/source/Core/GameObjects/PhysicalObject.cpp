@@ -10,11 +10,46 @@ PhysicalObject::PhysicalObject(unsigned int weight)
 void PhysicalObject::Collide(PhysicalObject& other)
 {
 	PhysicalObject& lighterObject = this->GetWeight() < other.GetWeight() ? *this : other;
+	PhysicalObject& heavierObject = this->GetWeight() > other.GetWeight() ? *this : other;
 	while (other.GetObjectBounds().intersects(this->GetObjectBounds()) || 
 		other.GetObjectBounds().contains(this->GetObjectPosition()))
 	{
-		// TODO: Get Unit Vector and Translate the lighter object out of the heavy one
-		// TODO: handle velocity and bouncing
+		sf::Vector2f velocity_vec = lighterObject.GetVelocity();
+		float unit_vec_norm = velocity_vec.x*velocity_vec.x + velocity_vec.y*velocity_vec.y;
+		if (unit_vec_norm > 1.0e-9){
+			auto light_postions = lighterObject.GetObjectPosition();
+			auto heavy_bounds = heavierObject.GetObjectBounds();
+			// find which side I am
+			//      1
+			//   -----------
+			//  2|         |4
+			//   |         |
+			//   -----------
+			//       3
+			
+			if (light_postions.x <=heavy_bounds.left){
+				if(light_postions.y <= heavy_bounds.top){
+					velocity_vec.y = -velocity_vec.y*0.8;
+					velocity_vec.x =  velocity_vec.x*0.8;
+				} else if (light_postions.y >= (heavy_bounds.top+heavy_bounds.height))
+				{
+					velocity_vec.y = -velocity_vec.y*0.8;
+					velocity_vec.x =  velocity_vec.x*0.8;
+				}
+				else 
+				{
+					velocity_vec.x = -velocity_vec.x*0.8;
+					velocity_vec.y =  velocity_vec.y*0.8;
+				}
+				
+			} else
+			{
+				velocity_vec.x = -velocity_vec.x*0.8;
+				velocity_vec.y =  velocity_vec.y*0.8;
+			}			
+		}
+
+		lighterObject.SetVelocity(velocity_vec);
 	}
 }
 
